@@ -1,0 +1,547 @@
+<div class="flex">
+  <div class="container">
+<mat-tab-group class="mt-4">
+    <mat-tab>
+        <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+          <img src="assets/menu.png" alt="Recycling" width="40" height="60">
+        </ng-template>
+        <!-- <div class="main  gap-4 p-4">
+          <div class="">
+            <div class="flex " style="justify-content: space-between;">
+              <div
+                class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                <select id="country"name="DropDownValue" autocomplete="country-name"
+                  class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                  <option value="" disabled selected>Choose Your Search Type</option>
+                  <option >Category Name</option>
+                </select>
+              </div>
+    
+             
+    
+            </div>
+    
+    
+            <form class="search-form flex items-center mt-3 gap-2">
+              <div class="gap-3 flex" >
+              <input type="text"  placeholder="Enter your Search type" name="searchInput"
+                class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+              <button type="submit" 
+                class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                Search
+              </button>
+              </div>
+           
+            </form>
+            <p-toast />
+    
+    
+          </div>
+    
+    
+    
+    
+        </div>
+    
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Category ID</th>
+              <th scope="col">Category Name</th>
+              <th scope="col">Date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+    
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of categoryActive; index as i">
+
+              <th scope="row">{{i+1}}</th>
+              <td>{{x.categoryId}}</td>
+              <td>{{x.categoryName}}</td>
+              <td>{{x.saveDate}}</td>
+              <td> <p-tag severity="warn" value="Active" [rounded]="true" /></td>
+              <td class="flex gap-3 ">
+                <button class="btn btn-light" >
+                  <img src="assets/search.png" width="22" height="20" alt="Search" />
+                </button>
+                <button class="btn btn-light" >
+                  <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                </button>
+    
+    
+              </td>
+            </tr>
+    
+          </tbody>
+        </table>
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+          (pageChange)="onPageChange($event);">
+        </ngb-pagination> 
+     -->
+     <mat-tab-group class="mt-4">
+        <mat-tab>
+            <p-toast></p-toast>
+            <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+              <img src="assets/entity.png" alt="Recycling" width="40" height="60">
+              <!-- recycling -->
+            </ng-template>
+            <div class="main  gap-4 p-4">
+              <!-- Dropdown -->
+              <div class="">
+                <div class="flex " style="justify-content: space-between;">
+                  <div
+                    class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                    <select id="country"name="DropDownValue" autocomplete="country-name" [(ngModel)]="dropDownValue"
+                      class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                      <option value="" disabled selected>Choose Your Search Type</option>
+                      <option value="categoryName" >Category Name</option>
+                    </select>
+                  </div>
+        
+                 
+        
+                </div>
+        
+                <!-- Search Form -->
+        
+                <form class="search-form flex items-center mt-3 gap-2 justify-between">
+                  <div class="gap-3 flex" >
+                  <input type="text"  placeholder="Enter your Search type" name="searchValue" [(ngModel)]="searchValue"
+                    class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+                  <button type="submit" (click)="search()"
+                    class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                    Search
+                  </button>
+                  </div>
+                  <button type="button" class="btn btn-success flex gap-1" style="margin-left: 500px;"
+                  (click)="openSecondModal(first)" >
+                  <img src="assets/menu (1).png" alt="Add" width="25" height="20" style="margin-right: 5px;">
+                  Add Category
+                </button>
+                </form>
+                <p-toast />
+        
+        
+              </div>
+        
+        
+        
+        
+            </div>
+            <ng-template #first let-modal >
+                <p-toast></p-toast>
+
+                <div class="modal-header">
+                  <h4 class="modal-title">Third Modal</h4>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss();clearData()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ml-4 mt-4 mb-4">
+                      <div>
+                        <label for="name" class="block mb-2 font-medium text-gray-700">Category Name</label>
+                        <input 
+                          type="text" 
+                          id="name" 
+                          name="categoryName" 
+                          class="input-field" 
+                          placeholder="Enter your categoryName" 
+                          [(ngModel)]="category.categoryName"
+                          required style="width: 300px;" />
+                      </div>
+                      <div class="grid grid-cols-1 md:grid-cols-2 ">
+                        <label for="address" class="block mb-2 font-medium text-gray-700">Discription</label>
+                        <textarea 
+                          id="address" 
+                          name="customerAddress" 
+                          class="input-field" 
+                          rows="6" 
+                          placeholder="Enter your categoryDiscription" 
+                          style="width: 700px;"
+                          [(ngModel)]="category
+                          .categoryDiscription" 
+                          required></textarea>
+                      </div>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-success ml-4 mb-4" (click)="saveCategory()" style="width: 100px;" >Save</button>
+              
+              </ng-template>
+              
+        
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Category ID</th>
+                  <th scope="col">Category Name</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+        
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let x of categoryActive; index as i">
+    
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{x.categoryId}}</td>
+                  <td>{{x.categoryName}}</td>
+                  <td>{{x.saveDate}}</td>
+                  <td> <p-tag severity="success" value="Active" [rounded]="true" /></td>
+                  <td class="flex gap-3 ">
+                    <button class="btn btn-light" (click)="openSecondModal(third);onViewBtn(x,i)" >
+                      <img src="assets/search.png" width="22" height="20" alt="Search" />
+                    </button>
+                    <button class="btn btn-light" (click)="confirmetionDelete(x.categoryId,'INACTIVE','category')" >
+                      <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                    </button>
+        
+        
+                  </td>
+                </tr>
+        
+              </tbody>
+            </table>
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+              (pageChange)="onPageChange($event);">
+            </ngb-pagination> 
+        
+            <ng-template #third let-modal >
+              <p-toast></p-toast>
+
+              <div class="modal-header">
+                <h4 class="modal-title">Category ID : {{categoryShow.categoryId}}</h4>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss();clearData2()"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ml-4 mt-4 mb-4">
+                    <div>
+                      <label for="name" class="block mb-2 font-medium text-gray-700">Category Name</label>
+                      <input 
+                        type="text" 
+                        id="name" 
+                        name="categoryName" 
+                        class="input-field" 
+                        placeholder="Enter your categoryName" 
+                        [(ngModel)]="categoryShow.categoryName"
+                         required style="width: 300px;" />
+                    </div>
+                    <div>
+                      <label for="name" class="block mb-2 font-medium text-gray-700">Save Date</label>
+                      <input 
+                        type="text" 
+                        id="name" 
+                        name="categoryName" 
+                        class="input-field" 
+                        placeholder="Enter your categoryName" 
+                        [(ngModel)]="categoryShow.saveDate"
+                        disabled  required style="width: 300px;" />
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 ">
+                      <label for="address" class="block mb-2 font-medium text-gray-700">Discription</label>
+                      <textarea 
+                        id="address" 
+                        name="customerAddress" 
+                        class="input-field" 
+                        rows="6" 
+                        placeholder="Enter your categoryDiscription" 
+                        style="width: 700px;"
+                        [(ngModel)]="categoryShow
+                        .categoryDiscription" 
+                        required></textarea>
+                    </div>
+                </div>
+              </div>
+              <div class="justify-between flex">
+              <div class="gap-4">
+              <button type="button" class="btn btn-success ml-4 mb-4" (click)="saveCategory()" style="width: 100px;" >Update</button>
+              <button type="button" class="btn btn-warning ml-4 mb-4" (click)="confirmetionDelete(categoryShow.categoryId,'INACTIVE','category')" style="width: 100px;" >Delete</button>
+            </div>
+            <button type="button" class="btn btn-danger ml-4 mb-4" (click)="modal.dismiss();clearData2()" style="width: 100px; margin-right: 25px;" >Close</button>
+
+              </div>
+            </ng-template>
+        
+          </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+                  <img src="assets/worksheet.png" alt="Recycling" width="40" height="60">
+                  <!-- recycling -->
+                </ng-template>
+           
+              <ng-template #second let-modal >
+                <p-toast></p-toast>
+
+                <div class="modal-header">
+                  <h4 class="modal-title">Third Modal</h4>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class=" grid-cols-1 md:grid-cols-2 gap-6 ml-4 mt-4 mb-4">
+                        <div>
+                          <label for="startTime" class="block mb-2 font-medium text-gray-700">Slot open Time</label>
+                          <input 
+                            type="time" 
+                            id="startTime" 
+                            name="slotOpenTime" 
+                            class="input-field" 
+                            [(ngModel)]="timeSlot.slotOpenTime"
+                            required 
+                            style="width: 300px;"
+                            step="60" />
+                        </div>
+                        <div>
+                          <label for="endTime" class="block mb-2 font-medium text-gray-700">Close time Time</label>
+                          <input 
+                            type="time" 
+                            id="endTime" 
+                            name="slotCloseTime" 
+                            class="input-field" 
+                            [(ngModel)]="timeSlot.slotCloseTime"
+                            required 
+                            style="width: 300px;"
+                            step="60" />
+                        </div>
+                      </div>
+                      
+                      
+                <button type="button" class="btn btn-success ml-4 mb-4" (click)="saveTimeSlot()" style="width: 100px;" >Save</button>
+                </div>
+              
+              </ng-template>
+
+<div class="justify-between flex mt-4">
+      <div>
+
+      </div>
+    <button type="button" class="btn btn-success flex gap-1" style="margin-left: 500px;"
+    (click)="openSecondModal1(second);" >
+    <img src="assets/time.png" alt="Add" width="25" height="20" style="margin-right: 5px;">
+    Add TimeSlot
+  </button>
+</div>
+                <table class="table mt-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Slot ID</th>
+                      <th scope="col">Slot Open Time</th>
+                      <th scope="col">Slot Close Time</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Actions</th>
+            
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let x of timeSlotActive
+                    ; index as i">
+        
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{x.zoomTimeSlotId}}</td>
+                      <td>{{x.slotOpenTime}}</td>
+                      <td>{{x.slotCloseTime}}</td>
+                      <td> <p-tag severity="success" value="Active" [rounded]="true" /></td>
+                      <td class="flex gap-3 ">
+                        <button class="btn btn-light" (click)="openSecondModal1(forth);onViewBtn2(x,i)">
+                          <img src="assets/search.png" width="22" height="20" alt="Search" />
+                        </button>
+                        <button class="btn btn-light" (click)="confirmetionDelete(x.zoomTimeSlotId,'INACTIVE','slotId')">
+                          <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                        </button>
+            
+            
+                      </td>
+                    </tr>
+            
+                  </tbody>
+                </table>
+                
+              <ng-template #forth let-modal >
+                <p-toast></p-toast>
+
+                <div class="modal-header">
+                  <h4 class="modal-title">Slot ID : {{timeSlotShow.zoomTimeSlotId}}</h4>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class=" grid-cols-1 md:grid-cols-2 gap-6 ml-4 mt-4 mb-4">
+                        <div>
+                          <label for="startTime" class="block mb-2 font-medium text-gray-700">Slot open Time</label>
+                          <input 
+                            type="time" 
+                            id="startTime" 
+                            name="slotOpenTime" 
+                            class="input-field" 
+                            [(ngModel)]="timeSlotShow.slotOpenTime"
+                            required 
+                            style="width: 300px;"
+                            step="60" 
+                            disabled/>
+                        </div>
+                        <div>
+                          <label for="endTime" class="block mb-2 font-medium text-gray-700">Close time Time</label>
+                          <input 
+                            type="time" 
+                            id="endTime" 
+                            name="slotCloseTime" 
+                            class="input-field" 
+                            [(ngModel)]="timeSlotShow.slotCloseTime"
+                            required 
+                            style="width: 300px;"
+                            step="60"
+                            disabled />
+                        </div>
+                      </div>
+                      
+                      
+                <button type="button" class="btn btn-warning ml-4 mb-4" (click)="confirmetionDelete(timeSlotShow.zoomTimeSlotId,'INACTIVE','cc');modal.dismiss()" style="width: 100px;" >Delete</button>
+                </div>
+              
+              </ng-template>
+                <ngb-pagination [collectionSize]="collectionSize1" [(page)]="page1" [pageSize]="pageSize1"
+                  (pageChange)="onPageChange2($event);">
+                </ngb-pagination> 
+            
+            
+            
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+                  <img src="assets/tool.png" alt="Recycling" width="40" height="60">
+                </ng-template>
+
+<p-toast></p-toast>
+                <body class="flex items-center justify-center  bg-gray-100" style="min-height: 490px;">
+
+                  <div class="bg-white p-8 rounded-lg w-96 text-center shadow-lg">
+                      <p class="text-gray-500 mb-6">Enter the zoom Configuration Code</p>
+              
+                      <!-- Username Input -->
+                      <input type="text" id="username" placeholder="Enter Zoom Authorization Code" [(ngModel)]="code" name="code"
+                          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+              
+                      <!-- Submit Button -->
+                      <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300" (click)="sendZoomCode()">
+                          Send Code
+                      </button>
+                  </div>
+              
+              </body>
+
+
+              </mat-tab>
+
+     </mat-tab-group>
+    
+    
+      </mat-tab>
+      <mat-tab >
+        <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+          <img src="assets/forgot-password.png" alt="Recycling" width="40" height="60">
+
+        </ng-template>
+        <!-- <div class="main  gap-4 p-4">
+          <div class="">
+            <div>
+              <div
+                class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                <select id="country"name="DropDownValue" autocomplete="country-name"
+                  class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                  <option value="" disabled selected>Choose Your Search Type</option>
+                  <option value="perchaseId">Perchase ID</option>
+                </select>
+              </div>
+    
+           
+    
+            </div>
+    
+    
+            <form class="search-form flex items-center mt-3 gap-2 ">
+              <div class="gap-3">
+              <input type="text"  placeholder="Enter your Search type" name="searchInput"
+                class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+              <button type="submit" 
+                class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                Search
+              </button>
+              </div>
+            
+            </form>
+            <p-toast />
+    
+    
+          </div>
+    
+    
+    
+    
+        </div> -->
+    
+        <!-- <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Email ID</th>
+              <th scope="col">Deliver Person ID</th>
+              <th scope="col">Email</th>
+            <th scope="col">Date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+    
+            </tr>
+          </thead>
+          <tbody>
+    <tr>
+              <th scope="row"></th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td> <p-tag severity="warn" value="Pending" [rounded]="true" /></td>
+              <td class="flex gap-3 ">
+                <button class="btn btn-light"  >
+                  <img src="assets/approved.png" width="22" height="20" alt="User" />
+                </button>
+                <button class="btn btn-light" (click)="openLg(content2);onViewBtn(x,i)">
+                  <img src="assets/search.png" width="22" height="20" alt="Search" />
+                </button>
+                <button class="btn btn-light" >
+                  <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                </button>
+    
+    
+              </td>
+            </tr>
+    
+          </tbody>
+        </table> -->
+        <!-- <ngb-pagination [collectionSize]="collectionSize1" [(page)]="page1" [pageSize]="pageSize1"
+          (pageChange)="onPageChange2($event);">
+        </ngb-pagination> -->
+        <p-toast></p-toast>
+        <body class="flex items-center justify-center  bg-gray-100" style="min-height: 650px;">
+
+          <div class="bg-white p-8 rounded-lg w-96 text-center shadow-lg">
+              <h2 class="text-2xl font-bold text-gray-700 mb-4">Forgot Password?</h2>
+              <p class="text-gray-500 mb-6">Enter your Email to receive an OTP via email.</p>
+      
+              <!-- Username Input -->
+              <input type="text" id="username" placeholder="Enter your Email" [(ngModel)]="email" name="email"
+                  class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4">
+      
+              <!-- Submit Button -->
+              <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300" (click)="emailsendOtp()">
+                  Send OTP
+              </button>
+          </div>
+      
+      </body>
+      </mat-tab>
+</mat-tab-group>
+
+  </div>
+</div>

@@ -1,0 +1,182 @@
+<!-- <app-navbar></app-navbar>
+<div class="flex " style="background-color: #F2C500; ">
+  <div class="ml-3 mt-4" style="background-color: #F2C500;  width: 1000px; height:210px;">
+    <h1>Publish Ypur System Our Web Site !!</h1>
+    <div class="paragraph" style="display: flex;">
+      <p style="flex: 1;">
+        The oldest classical British and Latin writings had little or no space between words
+        and could be written in boustrophedon (alternating directions). Over time, text direction
+        (left to right) became standardized. Word dividers and terminal punctuation became common.
+        The first way to divide sentences into groups was the
+        original paragraphos, similar to an underscore at the beginning of the new
+      </p>
+
+    </div>
+    <button type="button  " style=" bottom: 10px; right: 10px;" class="btn w-3 h-10  btn-primary btn-sm">
+      Click Here !!</button>
+
+  </div>
+</div> -->
+
+
+
+
+<!-- <div class="flex " style="background-color: #F2C500; ">
+  <div class="ml-3 mt-4" style="background-color: #F2C500;  width: 1000px; height:210px;">
+    <h1>Publish Ypur System Our Web Site !!</h1>
+    <div class="paragraph" style="display: flex;">
+      <p style="flex: 1;">
+        The oldest classical British and Latin writings had little or no space between words
+        and could be written in boustrophedon (alternating directions). Over time, text direction
+        (left to right) became standardized. Word dividers and terminal punctuation became common.
+        The first way to divide sentences into groups was the
+        original paragraphos, similar to an underscore at the beginning of the new
+      </p>
+    </div>
+    <button type="button  " style=" bottom: 10px; right: 10px;" class="btn w-3 h-10  btn-primary btn-sm">Small
+      button</button>
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<p-toast></p-toast>
+    
+    <section class="hero">
+        <div class="hero-text">
+            <h1>We Build & Publish <span style="color: orange;">System for All Business</span></h1>
+            <p>Are you want to publish Your Systems in our Website ?</p>
+            <a routerLink="/software/about-us">
+            <button class="btn btn-primary ">Learn More</button>
+            </a>
+           <a routerLink="/employee-sign-up">
+            <button  class="btn btn-warning ml-4">Register Now !!</button>
+           </a>
+        </div>
+        <img src="/assets/WhatsApp Image 2025-03-13 at 11.56.23_c2da5e16.jpg" alt="Illustration">
+    </section>
+
+    <!-- <section class="features">
+        <div class="feature-item">
+            <img src="https://via.placeholder.com/50" alt="Creative Ideas">
+            <h4>Creative Ideas</h4>
+            <p>Some description here.</p>
+        </div>
+        <div class="feature-item">
+            <img src="https://via.placeholder.com/50" alt="Innovative Tools">
+            <h4>Innovative Tools</h4>
+            <p>Some description here.</p>
+        </div>
+        <div class="feature-item">
+            <img src="https://via.placeholder.com/50" alt="Performance Optimized">
+            <h4>Performance Optimized</h4>
+            <p>Some description here.</p>
+        </div>
+        <div class="feature-item">
+            <img src="https://via.placeholder.com/50" alt="Goal Achievement">
+            <h4>Goal Achievement</h4>
+            <p>Some description here.</p>
+        </div>
+    </section> -->
+
+
+    
+<div class="example-sidenav-content flex space-x-2 " style="  display: flex;
+flex-wrap: wrap; 
+gap:16px; 
+justify-content: center;
+align-items: center;
+padding: 16px; 
+box-sizing: border-box">
+<mat-card class="example-card custom-card" *ngFor="let profile of combinedProfiles">
+  <mat-card-header>
+    <mat-card-title style="cursor: pointer;" [routerLink]="['/software/Categorys', profile.systemProfile.categoryDto?.categoryId]" >{{ profile.systemProfile.categoryDto?.categoryName }}</mat-card-title>
+    <mat-card-subtitle style="overflow: hidden; cursor: pointer;" [routerLink]="['/software/system-profile', profile.systemProfile.systemProfilesId]" >{{ profile.systemProfile.systemProfilesName }}</mat-card-subtitle>
+  </mat-card-header>
+  <p-rating class="ml-3" [(ngModel)]="values" [cancel]="false"></p-rating>
+
+  <div *ngIf="profile.images.length > 0">
+    <img 
+      [src]="'data:image/jpeg;base64,' + profile.images[0]" 
+      alt="SystemProfile Image"
+      width="200"
+      height="150"
+      style="cursor: pointer;"
+      [routerLink]="['/software/system-profile', profile.systemProfile.systemProfilesId]"
+    />
+  </div>
+
+
+
+  <mat-card-content></mat-card-content>
+
+  <mat-card-actions>
+    <ul class="side-nav1" style=" justify-content: start;">
+      <li class="side-nav__item1" style=" display: flex;">
+        <img src="/assets/video.png" (click)="openFullscreen(videoModal);cc()" alt="" width="40px">
+        <ng-template #videoModal let-modal>
+          <div class="modal-header">
+            <h5 class="modal-title">Video Playback</h5>
+            <button type="button" class="btn-close " aria-label="Close"
+              (click)="closeModal(modal, videoElement);cc()"></button>
+          </div>
+          <div class="modal-body">
+            <video #videoElement controls autoplay [src]="profile.videoUrl" width="100%" height="auto"></video>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal(modal, videoElement);cc()">
+              Close
+            </button>
+          </div>
+        </ng-template>
+
+
+      </li>
+      <li class="side-nav__item1" style=" display: flex;">
+        <img src="/assets/shopping-bag.png" [routerLink]="['/coustomer-sign-up', profile.systemProfile.systemProfilesId]"  alt="" width="40px">
+      </li>
+    </ul>
+  </mat-card-actions>
+</mat-card>
+
+
+
+
+</div>
+
+<p-paginator [first]="page * pageSize"
+           [rows]="pageSize"
+           [totalRecords]="collectionSize"
+           (onPageChange)="onPageChange($event)">
+</p-paginator>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

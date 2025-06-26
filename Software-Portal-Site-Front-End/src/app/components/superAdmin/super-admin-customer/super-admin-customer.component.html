@@ -1,0 +1,1261 @@
+<div class="flex">
+  <div class="container">
+
+    <mat-tab-group (selectedTabChange)="onTabClick($event)" class="mt-4">
+      <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" />
+      <mat-tab>
+        <ng-template  mat-tab-label   class="gap-6" style="font-size: medium;">
+          <img src="assets/right.png"  alt="Recycling" width="40" height="60">
+        </ng-template>
+   
+
+        <div class="main flex gap-4 p-4">
+          <!-- Dropdown -->
+          <div class="">
+            <div class="flex justify-between">
+              <div
+                class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                <select id="country" name="DropDownValue" [(ngModel)]="DropDownValue" autocomplete="country-name"
+                  class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                  <option value="" disabled selected>Choose Your Search Type</option>
+                  <option value="perchaseId">Perchase ID</option>
+                  <option value="ZoomId">Zoom ID</option>
+                </select>
+
+              </div>
+              <div class="flex gap-4">
+                <div>
+                  <input type="date" id="fromDate" name="fromDate" [(ngModel)]="fromDate"
+                         class="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        </div>
+                        <label for="fromDate" class="block text-lg font-bold  text-gray-700">To</label>
+      
+                <div>
+                <input type="date" id="fromDate" name="ToDate" [(ngModel)]="ToDate"
+                       class="block  px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                      </div>
+
+                      <button (click)="dateFilterApprove('ACTIVE','APPROVED')" style="height: 35px;" class="bg-blue-500  hover:bg-blue-700 text-white   px-4 border border-blue-700 rounded">
+                        Filter
+                      </button>
+              </div>
+            </div>
+
+            <!-- Search Form -->
+            <div class="mt-3 flex items-center" style="justify-content: space-between;">
+              <!-- Search Form -->
+              <form class="search-form flex items-center gap-2">
+                <input type="text" placeholder="Enter your Search type" [(ngModel)]="searchInput" name="searchInput"
+                  class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+                <button type="submit" (click)="search('ACTIVE','APPROVED')"
+                  class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                  Search
+                </button>
+              </form>
+
+
+              <button type="button" class="btn btn-success flex gap-1" style="margin-left: 500px;"
+                (click)="openLg(content)">
+                <img src="assets/calendar.png" alt="Add" width="25" height="20" style="margin-right: 5px;">
+                Create Meeting
+              </button>
+            </div>
+
+
+            <ng-template #content let-modal>
+              <p-toast></p-toast>
+              <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+                  (click)="modal.dismiss('Cross click')"></button>
+              </div>
+              <div class="modal-body">
+
+                <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+                    <div>
+                      <label for="name" class="block mb-2 font-medium text-gray-700">Company Name</label>
+                      <input type="text" id="name" name="customerName" style="width: 300px;" class=" input-field"
+                        [(ngModel)]="customerName" placeholder="Enter your name" required />
+                    </div>
+
+                    <div>
+                      <label for="contact" class="block mb-2 font-medium text-gray-700">Company Register No</label>
+                      <input type="text" id="contact" style="width: 300px;" name="companyRegNo"
+                        [(ngModel)]="companyRegNo" class=" input-field" placeholder="Enter your contact number"
+                        required />
+                    </div>
+                    
+
+
+
+                      <div>
+                        <label for="address" class="block mb-2 font-medium text-gray-700">Address</label>
+                        <textarea id="address" style="width: 300px;" name="customerAddress" class=" input-field"
+                          rows="4" [(ngModel)]="customerAddress" placeholder="Enter your address" required></textarea>
+                      </div>
+                  </div>
+                    
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+                      <div>
+                        <label for="contact" class="block mb-2 font-medium text-gray-700">Contact Number</label>
+                        <input type="text" id="contact" style="width: 300px;" name="customerNumber"
+                          [(ngModel)]="customerNumber" class=" input-field" placeholder="Enter your contact number"
+                          required />
+                      </div>
+                      <div>
+                        <label for="email" class="block mb-2 font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" style="width: 300px;" name="customerEmail"
+                          class=" input-field" [(ngModel)]="customerEmail" placeholder="Enter your email"
+                          required />
+                      </div>
+                    </div>
+                  
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+                      <div>
+                        <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+                        <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+                          [(ngModel)]="systemProfilesId2" class=" input-field" placeholder="Enter your contact number"
+                          required />
+                      </div>
+                    </div>
+              <!-- Schedule Meeting -->
+              <h2 class="text-lg font-semibold mt-4">Schedule Meeting</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+                <div>
+                  <label for="topic" class="block mb-2 font-medium text-gray-700">Topic</label>
+                  <input type="text" id="topic" name="topic" style="width: 300px;" [(ngModel)]="topic"
+                    class=" input-field" placeholder="Enter topic" required />
+                </div>
+                <div>
+                  <label for="duration" class="block mb-2 font-medium text-gray-700">Time Duration (minutes)</label>
+                  <input type="number" id="duration" name="duration" [(ngModel)]="duration" style="width: 300px;"
+                    class=" input-field" placeholder="Enter duration in minutes" required min="1" max="1440" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-9 ">
+                <div>
+                  <label for="datetime" class="block mb-2 font-medium text-gray-700">Choose Date & Time</label>
+                  <input type="datetime-local" id="datetime" style="width: 300px;" [(ngModel)]="startTime"
+                    name="startTime" class=" input-field" required />
+                </div>
+                <div>
+                  <label for="duration" class="block mb-2 font-medium text-gray-700">
+                    Select Your Time Slot
+                  </label>
+                  <select style="width: 300px;" id="duration" name="meeting_Duration"  [(ngModel)]="TimeSlotId" class="input-field" style="width: 300px;" required >
+                    <option value="" selected >Choose Your Time Slot</option>
+                    <option *ngFor="let x of timeSlotArrey" [value]="x.zoomTimeSlotId">{{ x.slotOpenTime }} To {{x.slotCloseTime}}</option>
+                  </select>
+                </div>
+               
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-9 ">
+ <div style="margin-left: 60px;">
+                  <label class="block mb-2 font-medium text-gray-700">Type</label>
+                  <div class="flex gap-4">
+                    <label class="flex items-center">
+                      <input type="radio" name="customerType" [(ngModel)]="customerType" value="Company"
+                        class="form-check-input" required />
+                      <span class="ml-2">Company</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="radio" name="customerType" [(ngModel)]="customerType" value="Other"
+                        class="form-check-input" required />
+                      <span class="ml-2">Other</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <p-toast></p-toast>
+
+              <!-- Submit Button -->
+              <div class="text-center">
+                <button type="submit"
+                  class="btn-primary mt-5 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  (click)="SheduleMeeting('')">Create</button>
+              </div>
+              </form>
+
+
+
+
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+          </div>
+          </ng-template>
+
+        </div>
+
+
+
+        <p-toast></p-toast>
+
+  </div>
+
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Perchase ID</th>
+        <th scope="col">System ID</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of zoomApprove; index as i" [ngClass]="{'today-row': isTodaColurRow(x.startDate)}">
+
+        <th scope="row">{{i+1}}</th>
+        <td>{{x.perchaseId}}</td>
+        <td>{{x.systemProfileDto?.systemProfilesId}}</td>
+        <td>{{x.customerName}}</td>
+        <td>{{x.startDate}}</td>
+        <td>{{x.startTime}}</td>
+        <td> <p-tag severity="success" value="Active" [rounded]="true" />
+        </td>
+
+        <td class="flex gap-3 ">
+          <button class="btn btn-light"  (click)="openLg(content1);onViewBtn(x,i)">
+            <img src="assets/search.png" width="22" height="20" alt="Search" />
+          </button>
+          <button *ngIf="isToday(x.startDate)" class="btn btn-light" (click)="joinMeeting(x.zoomLink)">
+            <img src="assets/meeting.png" width="22" height="20" alt="Search" />
+          </button>
+          
+          
+          <button class="btn btn-light" (click)="confirmComplete('Completed',x.perchaseId,x.zmeetingId,'')">
+                      <img src="assets/checked.png" width="22" height="20" alt="User" />
+                    </button>
+          <button class="btn btn-light" (click)="confirmRejected('RejectedApprove',x.perchaseId,x.zmeetingId,'')" >
+            <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+          </button>
+
+
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+    (pageChange)="onPageChange($event)">
+  </ngb-pagination>
+
+
+
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+      <img src="assets/calendar (1).png" alt="Recycling" width="40" height="60">
+      <!-- recycling -->
+    </ng-template>
+    <div class="main  gap-4 p-4">
+      <!-- Dropdown -->
+      <div class="">
+        <div class="flex " style="justify-content: space-between;">
+          <div
+            class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+            <select id="country" [(ngModel)]="DropDownValue" name="DropDownValue" autocomplete="country-name"
+              class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+              <option value="" disabled selected>Choose Your Search Type</option>
+              <option value="perchaseId">Perchase ID</option>
+            </select>
+          </div>
+
+          <div class="flex gap-4">
+            <div>
+              <input type="date" id="fromDate" name="fromDate" [(ngModel)]="fromDate"
+                     class="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                    <label for="fromDate" class="block text-lg font-bold  text-gray-700">To</label>
+  
+            <div>
+            <input type="date" id="fromDate" name="ToDate" [(ngModel)]="ToDate"
+                   class="block  px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                  </div>
+          </div>
+
+        </div>
+
+        <!-- Search Form -->
+
+        <form class="search-form flex items-center mt-3 gap-2 justify-between">
+          <div class="flex">
+          <input type="text" [(ngModel)]="searchInput" placeholder="Enter your Search type" name="searchInput"
+            class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+          <button type="submit" (click)="search('ACTIVE','PENDING')"
+            class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+            Search
+          </button>
+          </div>
+          <button (click)="dateFilterPending('ACTIVE','PENDING')" style="height: 35px;" class="bg-blue-500  hover:bg-blue-700 text-white   px-4 border border-blue-700 rounded">
+            Filter
+          </button>
+        </form>
+        <p-toast />
+
+
+      </div>
+
+
+
+
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Perchase ID</th>
+          <th scope="col">System ID</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">Slot Time</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of zoomPending; index as i">
+
+          <th scope="row">{{i+1}}</th>
+          <td>{{x.perchaseId}}</td>
+          <td>{{x.systemProfileDto?.systemProfilesId}}</td>
+          <td>{{x.customerName}}</td>
+          <td>{{x.startDate}}</td>
+          <td>{{x.zoomTimeSlotsDto?.slotOpenTime}} To {{x.zoomTimeSlotsDto?.zoomTimeSlotId}}</td>
+          <td> <p-tag severity="warn" value="Pending" [rounded]="true" /></td>
+          <td class="flex gap-3 ">
+            <button class="btn btn-light" (click)="openLg(content2);onViewBtn(x,i)" >
+              <img src="assets/approved.png" width="22" height="20" alt="User" />
+            </button>
+            <!-- <button class="btn btn-light" (click)="openLg(content2);onViewBtn(x,i)">
+              <img src="assets/search.png" width="22" height="20" alt="Search" />
+            </button> -->
+            <button class="btn btn-light" (click)="confirmRejected('Rejected',x.perchaseId,x.zmeetingId,'')" >
+              <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+            </button>
+
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <ngb-pagination [collectionSize]="collectionSize1" [(page)]="page1" [pageSize]="pageSize1"
+      (pageChange)="onPageChange2($event);">
+    </ngb-pagination>
+
+
+
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+      <img src="assets/business.png" alt="Recycling" width="40" height="60">
+      <!-- recycling -->
+    </ng-template>
+    <div class="main  gap-4 p-4">
+      <!-- Dropdown -->
+      <div class="">
+      
+        <div class="flex" style="justify-content: space-between;">
+          <div
+          class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+          <select id="country" name="DropDownValue" [(ngModel)]="DropDownValue" autocomplete="country-name"
+            class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+            <option value="" disabled selected>Choose Your Search Type</option>
+            <option value="perchaseId">Perchase ID</option>
+            <option value="ZoomId">Zoom ID</option>
+          </select>
+
+        </div>
+
+
+        <div class="flex gap-4">
+          <div>
+            <input type="date" id="fromDate" name="fromDate" [(ngModel)]="fromDate"
+                   class="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                  </div>
+                  <label for="fromDate" class="block text-lg font-bold  text-gray-700">To</label>
+
+          <div>
+          <input type="date" id="fromDate" name="ToDate" [(ngModel)]="ToDate"
+                 class="block  px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+        </div>
+
+
+
+
+
+        </div>
+       
+        <form class="search-form flex items-center  mt-3 " style="justify-content: space-between;">
+          <div>
+                <input type="text" placeholder="Enter your Search type" [(ngModel)]="searchInput" name="searchInput"
+            class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+          <button type="submit" (click)="search('ACTIVE','COMPLETED')"
+            class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+            Search
+          </button>
+          </div>
+        
+          <button (click)="dateFilterComplete('ACTIVE','COMPLETED')" style="height: 35px;" class="bg-blue-500  hover:bg-blue-700 text-white   px-4 border border-blue-700 rounded">
+            Filter
+          </button>
+
+
+        </form>
+        <p-toast />
+
+
+      </div>
+
+
+
+
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Perchase ID</th>
+          <th scope="col">System ID</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">Slot Time</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of zoomCompleted; index as i">
+
+          <th scope="row">{{i+1}}</th>
+          <td>{{x.perchaseId}}</td>
+          <td>{{x.systemProfileDto?.systemProfilesId}}</td>
+          <td>{{x.customerName}}</td>
+          <td>{{x.startDate}}</td>
+          <td>{{x.zoomTimeSlotsDto?.slotOpenTime}} To {{x.zoomTimeSlotsDto?.zoomTimeSlotId}}</td>
+          <td> <p-tag severity="danger" value="Completed" [rounded]="true" /></td>
+          <td class="flex gap-3 ">
+            <button class="btn btn-light" (click)="openLg(content4);onViewBtn(x,i)" >
+              <img src="assets/search.png" width="22" height="20" alt="User" />
+            </button>
+            <!-- <button class="btn btn-light" (click)="openLg(content2);onViewBtn(x,i)">
+              <img src="assets/search.png" width="22" height="20" alt="Search" />
+            </button> -->
+            <button class="btn btn-light" (click)="confirmRejected('Rejected',x.perchaseId,x.zmeetingId,'')" >
+              <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+            </button>
+
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <ngb-pagination [collectionSize]="collectionSize3" [(page)]="page3" [pageSize]="pageSize3"
+      (pageChange)="onPageChange4($event)">
+    </ngb-pagination>
+
+
+
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+      <img src="assets/delete.png" alt="Recycling" width="40" height="60">
+      <!-- recycling -->
+    </ng-template>
+
+
+    <div class="main  gap-4 p-4">
+      <!-- Dropdown -->
+      <div class="">
+        <div class="flex" style="justify-content: space-between;">   
+                 <div
+          class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+          <select id="country" name="DropDownValue" [(ngModel)]="DropDownValue" autocomplete="country-name"
+            class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+            <option value="" disabled selected>Choose Your Search Type</option>
+            <option value="perchaseId">Perchase ID</option>
+            <option value="ZoomId">Zoom ID</option>
+          </select>
+
+        </div>
+        <div class="flex gap-4">
+          <div>
+            <input type="date" id="fromDate" name="fromDate" [(ngModel)]="fromDate"
+                   class="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                  </div>
+                  <label for="fromDate" class="block text-lg font-bold  text-gray-700">To</label>
+
+          <div>
+          <input type="date" id="fromDate" name="ToDate" [(ngModel)]="ToDate"
+                 class="block  px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+        </div>
+
+        </div>
+
+        <!-- Search Form -->
+
+        <form class="search-form flex items-center gap-2 mt-3 justify-between">
+          <div>
+          <input type="text" placeholder="Enter your Search type" [(ngModel)]="searchInput" name="searchInput"
+            class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+          <button type="submit" (click)="search('INACTIVE','INACTIVE')"
+            class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+            Search
+          </button>
+          </div>
+          <button (click)="dateFilterInactive('INACTIVE','')" style="height: 35px;" class="bg-blue-500  hover:bg-blue-700 text-white   px-4 border border-blue-700 rounded">
+            Filter
+          </button>
+        </form>
+        <p-toast />
+
+      </div>
+
+
+
+
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Perchase ID</th>
+          <th scope="col">System ID</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">Start Time</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let x of zoomInActive; index as i">
+
+          <th scope="row">{{i+1}}</th>
+          <td>{{x.perchaseId}}</td>
+          <td>{{x.systemProfileDto?.systemProfilesId}}</td>
+          <td>{{x.customerName}}</td>
+          <td>{{x.startDate}}</td>
+          <td>{{x.startTime}}</td>
+          <td>    <span [ngSwitch]="x.requestStatus">
+            <p-tag *ngSwitchCase="'PENDING'" severity="warn" value="Pending" [rounded]="true" />
+            <p-tag *ngSwitchCase="'APPROVED'" severity="success" value="Approved" [rounded]="true" />
+            <p-tag *ngSwitchCase="'COMPLETED'" severity="danger" value="Completed" [rounded]="true"  />
+            <p-tag *ngSwitchDefault severity="secondary" value="Unknown" [rounded]="true"  />
+          </span></td>
+          <td class="flex gap-3 ">
+            <button class="btn btn-light" (click)="openLg(content3);onViewBtn(x,i)">
+              <img src="assets/search.png" width="22" height="20" alt="Search" />
+            </button>
+            <!-- <button class="btn btn-light" (click)="approveAndDelete('Active',x.zoomMeetingId,x.zmeetingId)" >
+              <img src="assets/data-recovery.png" width="22" height="20" alt="User" />
+            </button> -->
+            <p-confirmPopup></p-confirmPopup>
+
+            <button class="btn btn-light" (click)="confirmDialogDeleteDatabase('DeleteDatabase',x.perchaseId,x.zmeetingId,'')">
+              <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+            </button>
+
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <ngb-pagination [collectionSize]="collectionSize2" [(page)]="page2" [pageSize]="pageSize2"
+    (pageChange)="onPageChange3($event)">
+  </ngb-pagination>
+  
+
+  </mat-tab>
+
+  
+  </mat-tab-group>
+
+
+</div>
+<ng-template #content1 let-modal>
+  <p-toast></p-toast>
+  <div class="modal-header">
+    <h4 class="modal-title">Perchase ID :{{zoomDataShow.perchaseId}}</h4>
+    <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+        <div>
+          <label for="name" class="block mb-2 font-medium text-gray-700">Company Name</label>
+          <input type="text" id="name" name="customerName" style="width: 300px;" class=" input-field"
+           value="{{zoomDataShow.customerName}}" placeholder="Enter your name" disabled />
+        </div>
+
+        <div>
+          <label for="contact" class="block mb-2 font-medium text-gray-700">Company Register No</label>
+          <input type="text" id="contact" style="width: 300px;" name="companyRegNo"
+          value="{{zoomDataShow.companyRegNo}}" class=" input-field" placeholder="Enter your contact number"
+          disabled />
+        </div>
+        
+
+
+
+          <div>
+            <label for="address" class="block mb-2 font-medium text-gray-700">Address</label>
+            <textarea id="address" style="width: 300px;" name="customerAddress" class=" input-field"
+              rows="4" value="{{zoomDataShow.customerAddress}}" placeholder="Enter your address" disabled></textarea>
+          </div>
+      </div>
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Contact Number</label>
+            <input type="text" id="contact" style="width: 300px;" name="customerNumber"
+            value="{{zoomDataShow.customerNumber}}"class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="email" class="block mb-2 font-medium text-gray-700">Email</label>
+            <input type="email" id="email" style="width: 300px;" name="customerEmail"
+              class=" input-field" value="{{zoomDataShow.customerEmail}}" placeholder="Enter your email"
+              disabled />
+          </div>
+        </div>
+      
+
+        <h2 class="text-lg font-semibold mt-4">System Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="${{zoomDataShow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Employee ID</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.employeeDto?.employeeId}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Type</label>
+          <input type="text" id="duration" name="duration" value="{{zoomDataShow.customerType}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+        </div>
+  <!-- Schedule Meeting -->
+  <h2 class="text-lg font-semibold mt-4">Schedule Meeting</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+    <div>
+      <label for="topic" class="block mb-2 font-medium text-gray-700">Topic</label>
+      <input type="text" id="topic" name="topic" style="width: 300px;" value="{{zoomDataShow.sheduleTopic}}"
+        class=" input-field" placeholder="Enter topic" disabled />
+    </div>
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Time Duration (minutes)</label>
+      <input type="number" id="duration" name="duration" value="{{zoomDataShow.meeting_Duration}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" required min="1" max="1440" disabled />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Date & Time</label>
+      <input type="text" id="duration" name="duration" value="{{zoomDataShow.startDate}} {{zoomDataShow.startTime}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" disabled  />
+    </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Time Slot</label>
+        <input type="text" id="duration" name="duration" value="{{zoomDataShow.zoomTimeSlotsDto?.slotOpenTime}} To {{zoomDataShow.zoomTimeSlotsDto?.slotCloseTime}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting Password</label>
+      <input type="text" id="duration" name="duration" value="{{zoomDataShow.meetingPassword}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" disabled />
+    </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting ID</label>
+        <input type="text" id="duration" name="duration" value="{{zoomDataShow.zmeetingId}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="address" class="block mb-2 font-medium text-gray-700">Meeting Link</label>
+      <textarea id="address" style="width: 400px;" name="customerAddress" class=" input-field"
+        rows="2" value="{{zoomDataShow.zoomLink}}" placeholder="Enter your address" disabled></textarea>
+    </div>
+     
+  </div>
+  <div class="flex gap-4">
+    <button type="button" class="btn btn-success" (click)="confirmComplete('Completed',zoomDataShow.perchaseId,zoomDataShow.zmeetingId,'');modal.close('Close click')">Reject Meeting</button>
+  <button type="button" class="btn btn-warning" (click)="confirmRejected('RejectedApprove',zoomDataShow.perchaseId,zoomDataShow.zmeetingId,'');modal.close('Close click')">Reject Meeting</button>
+  </div>
+  <!-- Submit Button -->
+  </form>
+
+
+
+
+
+
+
+
+</div>
+<div class="modal-footer ">
+<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+</div>
+</ng-template>
+
+
+
+<ng-template #content2 let-modal>
+  <p-toast></p-toast>
+  <div class="modal-header">
+    <h4 class="modal-title">Perchase ID :{{zoomDataShow.perchaseId}}</h4>
+    <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+        <div>
+          <label for="name" class="block mb-2 font-medium text-gray-700">Company Name</label>
+          <input type="text" id="name" name="customerName" style="width: 300px;" class=" input-field"
+           value="{{zoomDataShow.customerName}}" placeholder="Enter your name" disabled />
+        </div>
+
+        <div>
+          <label for="contact" class="block mb-2 font-medium text-gray-700">Company Register No</label>
+          <input type="text" id="contact" style="width: 300px;" name="companyRegNo"
+          value="{{zoomDataShow.companyRegNo}}" class=" input-field" placeholder="Enter your contact number"
+          disabled />
+        </div>
+        
+
+
+
+          <div>
+            <label for="address" class="block mb-2 font-medium text-gray-700">Address</label>
+            <textarea id="address" style="width: 300px;" name="customerAddress" class=" input-field"
+              rows="4" value="{{zoomDataShow.customerAddress}}" placeholder="Enter your address" disabled></textarea>
+          </div>
+      </div>
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Contact Number</label>
+            <input type="text" id="contact" style="width: 300px;" name="customerNumber"
+            value="{{zoomDataShow.customerNumber}}"class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="email" class="block mb-2 font-medium text-gray-700">Email</label>
+            <input type="email" id="email" style="width: 300px;" name="customerEmail"
+              class=" input-field" value="{{zoomDataShow.customerEmail}}" placeholder="Enter your email"
+              disabled />
+          </div>
+        </div>
+      
+
+        <h2 class="text-lg font-semibold mt-4">System Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="${{zoomDataShow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Employee ID</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.employeeDto?.employeeId}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+          <div>
+            <label for="duration" class="block mb-2 font-medium text-gray-700">Type</label>
+            <input type="text" id="duration" name="duration" value="{{zoomDataShow.customerType}}" style="width: 300px;"
+              class=" input-field" placeholder="Enter duration in minutes" disabled  />
+          </div>
+
+        </div>
+  <!-- Schedule Meeting -->
+  <h2 class="text-lg font-semibold mt-4">Schedule Meeting</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+    <div>
+      <label for="topic" class="block mb-2 font-medium text-gray-700">Topic</label>
+      <input type="text" id="topic" name="topic" style="width: 300px;" value="{{zoomDataShow.sheduleTopic}}"
+        class=" input-field" placeholder="Enter topic" disabled />
+    </div>
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Date</label>
+      <input type="text" id="duration" name="duration" value="{{zoomDataShow.startDate}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" disabled  />
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+    <div>
+      <label for="topic" class="block mb-2 font-medium text-gray-700">Time Slot</label>
+      <input type="text" id="topic" name="topic" style="width: 300px;" value="{{zoomDataShow.zoomTimeSlotsDto?.slotOpenTime}} To {{zoomDataShow.zoomTimeSlotsDto?.slotCloseTime}}"
+        class=" input-field" placeholder="Enter topic" disabled />
+    </div>
+  </div>
+
+  <h2 class="text-lg font-semibold mt-4">Create Meeting</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+
+    <div>
+      <label for="datetime" class="block mb-2 font-medium text-gray-700">Choose Date & Time</label>
+      <input 
+        type="datetime-local" 
+        id="datetime" 
+        name="startTime" 
+        class="input-field"
+          style="width: 300px;"
+        [(ngModel)]="startTime2" 
+        required />
+    </div>
+    
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Time Duration (minutes)</label>
+      <input 
+        type="number" 
+        id="duration" 
+        name="meeting_Duration" 
+        class="input-field" 
+        placeholder="Enter duration in minutes" 
+        [(ngModel)]="duration2" 
+        required 
+        style="width: 300px;" 
+        min="1" 
+        max="1440" 
+      />
+    </div>
+
+
+  </div>
+  
+ 
+  <div class="flex gap-4">
+  <button type="button" class="btn btn-success" (click)="confirmApprove('Approved',zoomDataShow.perchaseId,zoomDataShow.zmeetingId,'customer')">Approve Meeting</button>
+
+  <button type="button" class="btn btn-warning" (click)="confirmRejected('Rejected',zoomDataShow.perchaseId,zoomDataShow.zmeetingId,'');modal.close('Close click')">Reject Meeting</button>
+  </div>
+  <!-- Submit Button -->
+ 
+  </form>
+
+
+
+
+
+
+
+
+</div>
+<div class="modal-footer ">
+<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+</div>
+</ng-template>
+
+
+<ng-template #content3 let-modal>
+  <p-toast></p-toast>
+  <div class="modal-header">
+    <div class="flex gap-12 justify-between ">
+    <h4 class="modal-title">Perchase ID :{{zoomDataShow.perchaseId}}</h4>
+    <h4 class="modal-title">Meeting Status :
+      <span [ngSwitch]="zoomDataShow.requestStatus">
+        <p-tag *ngSwitchCase="'PENDING'" severity="warn" value="Pending" [rounded]="true" />
+        <p-tag *ngSwitchCase="'APPROVED'" severity="success" value="Approved" [rounded]="true" />
+        <p-tag *ngSwitchCase="'COMPLETED'" severity="info" value="Completed" [rounded]="true"  />
+        <p-tag *ngSwitchDefault severity="secondary" value="Unknown" [rounded]="true"  />
+      </span>
+    </h4>
+    </div>
+    <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+        <div>
+          <label for="name" class="block mb-2 font-medium text-gray-700">Company Name</label>
+          <input type="text" id="name" name="customerName" style="width: 300px;" class=" input-field"
+           value="{{zoomDataShow.customerName}}" placeholder="Enter your name" disabled />
+        </div>
+
+        <div>
+          <label for="contact" class="block mb-2 font-medium text-gray-700">Company Register No</label>
+          <input type="text" id="contact" style="width: 300px;" name="companyRegNo"
+          value="{{zoomDataShow.companyRegNo}}" class=" input-field" placeholder="Enter your contact number"
+          disabled />
+        </div>
+        
+
+
+
+          <div>
+            <label for="address" class="block mb-2 font-medium text-gray-700">Address</label>
+            <textarea id="address" style="width: 300px;" name="customerAddress" class=" input-field"
+              rows="4" value="{{zoomDataShow.customerAddress}}" placeholder="Enter your address" disabled></textarea>
+          </div>
+      </div>
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Contact Number</label>
+            <input type="text" id="contact" style="width: 300px;" name="customerNumber"
+            value="{{zoomDataShow.customerNumber}}"class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="email" class="block mb-2 font-medium text-gray-700">Email</label>
+            <input type="email" id="email" style="width: 300px;" name="customerEmail"
+              class=" input-field" value="{{zoomDataShow.customerEmail}}" placeholder="Enter your email"
+              disabled />
+          </div>
+        </div>
+      
+
+        <h2 class="text-lg font-semibold mt-4">System Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="${{zoomDataShow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Employee ID</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.employeeDto?.employeeId}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Time Slot</label>
+          <input type="text" id="duration" name="duration" value="{{zoomDataShow.zoomTimeSlotsDto?.slotOpenTime}} To {{zoomDataShow.zoomTimeSlotsDto?.slotCloseTime}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+        </div>
+  <!-- Schedule Meeting -->
+  <h2 class="text-lg font-semibold mt-4">Schedule Meeting</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+    <div>
+      <label for="topic" class="block mb-2 font-medium text-gray-700">Topic</label>
+      <input type="text" id="topic" name="topic" style="width: 300px;" value="{{zoomDataShow.sheduleTopic}}"
+        class=" input-field" placeholder="Enter topic" disabled />
+    </div>
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Time Duration (minutes)</label>
+      <input type="number" id="duration" name="duration" value="{{zoomDataShow.meeting_Duration}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" required min="1" max="1440" disabled />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Date & Time</label>
+      <input type="text" id="duration" name="duration" value="{{zoomDataShow.startDate}} {{zoomDataShow.startTime}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" disabled  />
+    </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Time Slot</label>
+        <input type="text" id="duration" name="duration" value="{{zoomDataShow.zoomTimeSlotsDto?.slotOpenTime}} To {{zoomDataShow.zoomTimeSlotsDto?.slotCloseTime}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting Password</label>
+      <input type="text" id="duration" name="duration" value="{{zoomDataShow.meetingPassword}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" disabled />
+    </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting ID</label>
+        <input type="text" id="duration" name="duration" value="{{zoomDataShow.zmeetingId}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="address" class="block mb-2 font-medium text-gray-700">Meeting Link</label>
+      <textarea id="address" style="width: 400px;" name="customerAddress" class=" input-field"
+        rows="2" value="{{zoomDataShow.zoomLink}}" placeholder="Enter your address" disabled></textarea>
+    </div>
+    
+  </div>
+  <div class="flex">
+
+  <button type="button" class="btn btn-warning" (click)="confirmDialogDeleteDatabase('DeleteDatabase',zoomDataShow.perchaseId,zoomDataShow.zmeetingId,'');modal.close('Close click')">Delete Record</button>
+  </div>
+  <!-- Submit Button -->
+ 
+  </form>
+
+
+
+
+
+
+
+
+</div>
+<div class="modal-footer ">
+<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+</div>
+</ng-template>
+
+
+
+<ng-template #content4 let-modal>
+  <p-toast></p-toast>
+  <div class="modal-header">
+    <h4 class="modal-title">Perchase ID :{{zoomDataShow.perchaseId}}</h4>
+      <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+        <div>
+          <label for="name" class="block mb-2 font-medium text-gray-700">Company Name</label>
+          <input type="text" id="name" name="customerName" style="width: 300px;" class=" input-field"
+           value="{{zoomDataShow.customerName}}" placeholder="Enter your name" disabled />
+        </div>
+
+        <div>
+          <label for="contact" class="block mb-2 font-medium text-gray-700">Company Register No</label>
+          <input type="text" id="contact" style="width: 300px;" name="companyRegNo"
+          value="{{zoomDataShow.companyRegNo}}" class=" input-field" placeholder="Enter your contact number"
+          disabled />
+        </div>
+        
+
+
+
+          <div>
+            <label for="address" class="block mb-2 font-medium text-gray-700">Address</label>
+            <textarea id="address" style="width: 300px;" name="customerAddress" class=" input-field"
+              rows="4" value="{{zoomDataShow.customerAddress}}" placeholder="Enter your address" disabled></textarea>
+          </div>
+      </div>
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Contact Number</label>
+            <input type="text" id="contact" style="width: 300px;" name="customerNumber"
+            value="{{zoomDataShow.customerNumber}}"class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="email" class="block mb-2 font-medium text-gray-700">Email</label>
+            <input type="email" id="email" style="width: 300px;" name="customerEmail"
+              class=" input-field" value="{{zoomDataShow.customerEmail}}" placeholder="Enter your email"
+              disabled />
+          </div>
+        </div>
+      
+
+        <h2 class="text-lg font-semibold mt-4">System Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="${{zoomDataShow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Employee ID</label>
+            <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+            value="{{zoomDataShow.systemProfileDto?.employeeDto?.employeeId}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Time Slot</label>
+          <input type="text" id="duration" name="duration" value="{{zoomDataShow.zoomTimeSlotsDto?.slotOpenTime}} To {{zoomDataShow.zoomTimeSlotsDto?.slotCloseTime}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+        </div>
+  <!-- Schedule Meeting -->
+  <h2 class="text-lg font-semibold mt-4">Schedule Meeting</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+    <div>
+      <label for="topic" class="block mb-2 font-medium text-gray-700">Topic</label>
+      <input type="text" id="topic" name="topic" style="width: 300px;" value="{{zoomDataShow.sheduleTopic}}"
+        class=" input-field" placeholder="Enter topic" disabled />
+    </div>
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Time Duration (minutes)</label>
+      <input type="number" id="duration" name="duration" value="{{zoomDataShow.meeting_Duration}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" required min="1" max="1440" disabled />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Date & Time</label>
+      <input type="text" id="duration" name="duration" value="{{zoomDataShow.startDate}} {{zoomDataShow.startTime}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" disabled  />
+    </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Time Slot</label>
+        <input type="text" id="duration" name="duration" value="{{zoomDataShow.zoomTimeSlotsDto?.slotOpenTime}} To {{zoomDataShow.zoomTimeSlotsDto?.slotCloseTime}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting Password</label>
+      <input type="text" id="duration" name="duration" value="{{zoomDataShow.meetingPassword}}" style="width: 300px;"
+        class=" input-field" placeholder="Enter duration in minutes" disabled />
+    </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting ID</label>
+        <input type="text" id="duration" name="duration" value="{{zoomDataShow.zmeetingId}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+    <div>
+      <label for="address" class="block mb-2 font-medium text-gray-700">Meeting Link</label>
+      <textarea id="address" style="width: 400px;" name="customerAddress" class=" input-field"
+        rows="2" value="{{zoomDataShow.zoomLink}}" placeholder="Enter your address" disabled></textarea>
+    </div>
+    
+  </div>
+  <div class="flex">
+
+  <button type="button" class="btn btn-warning" (click)="confirmRejected('Rejected',zoomDataShow.perchaseId,zoomDataShow.zmeetingId,'');modal.close('Close click')">Delete Record</button>
+  </div>
+  <!-- Submit Button -->
+ 
+  </form>
+
+
+
+
+
+
+
+
+</div>
+<div class="modal-footer ">
+<button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+</div>
+</ng-template>
+
+
+
+
+
+
+
+
+

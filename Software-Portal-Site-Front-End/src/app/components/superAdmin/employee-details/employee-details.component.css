@@ -1,0 +1,157 @@
+.fullscreen-container {
+    display: grid;
+    place-items: center; /* Centers content */
+    height: 100vh;
+    width: 100vw;
+    background-color: #ddd;
+  }
+  .search-bar{
+    display: flex;
+    margin-left: 20px;
+    height: 80px;
+    width: 340px;
+  }
+  .bn{
+    height: 30px;
+    width: 200px;
+  }
+  .btn-search{
+    margin-top: 30px;
+    margin-left: 30px;
+    padding: auto;
+    height: 33px;
+    width: 80px;
+  }
+  .side-texts{
+    display: flex;
+  }
+  .cb{
+    margin-left: 20px;
+    
+  }
+  .cc{
+    margin-left: 20px;
+    
+  }
+  .out-put{
+    height: 40px;
+    width: 350px;
+    padding-top: 8px;
+    padding-left: 12px;
+  }
+  .out-put1{
+    height: 100px;
+    width: 300px;
+    padding-top: 4px;
+    padding-left: 12px;
+    position: relative;
+    margin-left: 20px;
+    overflow-wrap: break-word;
+  }
+  
+  .btn2{
+    height: 40px;
+    margin-top:60px ;
+  }
+  .mcc{
+    padding-bottom: 500px;
+  }
+  .ccc{
+    height: 80px;
+    margin-left: 20px;
+  }
+  .vv{
+    height: 150px;
+  }
+  .search-button {
+    border-radius: 0 7px 7px 0;
+    background-color: whitesmoke;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  }
+  
+  .search-input {
+  border-radius: 7px 0 0 7px;
+  width: 300px;
+  flex: 1;
+  padding: 10px;
+  /* border: 1px solid black; */
+  outline: none;
+  
+  }
+  .cv{
+  padding-top:20px ;
+  height: 35px;
+  width: 300px; 
+   
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  padding: 20px;
+  }
+  
+  @media (min-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  /* Form */
+  .form-section {
+    padding: 1rem;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .input-field:focus {
+    border-color: #4a90e2;
+  }
+  
+  textarea.input-field {
+    resize: none;
+  }
+  
+  .form-check-input {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+  
+  /* Button */
+  .btn-primary {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #357ABD;
+  }
+  
+  .image-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  } 
+  
+   .image-section img {
+    max-width: 100%;
+    height: auto; 
+  }
+  

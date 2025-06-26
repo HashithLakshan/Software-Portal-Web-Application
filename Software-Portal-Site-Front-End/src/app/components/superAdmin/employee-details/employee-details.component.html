@@ -1,0 +1,738 @@
+<div class="flex">
+
+<div class="container">
+
+<mat-tab-group (selectedTabChange)="onTabClick($event)" class="mt-4">
+    <mat-tab >
+      <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+        <img src="assets/manager.png" alt="Recycling" width="40" height="60">
+        <!-- recycling -->
+    </ng-template>
+      
+
+      <div class="main flex gap-4 p-4">
+        <!-- Dropdown -->
+         <div class="">
+        <div>
+          <div class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+            <select id="country" name="dropDown" [(ngModel)]="this.dropDown" autocomplete="country-name"
+            class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+            <option value="" disabled selected>Choose Your Search Type</option>
+            <option value="name">Company Name</option>
+            <option value="id">Employee ID</option>
+        </select>
+        
+          </div>
+        </div>
+    
+        <!-- Search Form -->
+        <div class="mt-3 flex items-center" style="justify-content: space-between;">
+          <!-- Search Form -->
+          <form class="search-form flex items-center gap-2">
+            <input type="text" placeholder="Enter your Search type" name="searchInputApprove" [(ngModel)]="this.searchInputApprove"
+              class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+            <button type="submit" (click)="searchApprove()"
+              class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+              Search
+            </button>
+          </form>
+        
+         
+          <button type="button" class="btn btn-success flex gap-1" style="margin-left: 500px;" (click)="openLg(content)">
+            <img src="assets/add-user.png" alt="Add" width="25" height="20" style="margin-right: 5px;">
+            
+        </button>
+                </div>
+                
+
+        <ng-template #content let-modal>
+          <p-toast />
+          <div class="modal-header">
+            <h4 class="modal-title">Modal title</h4>
+            <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close" (click)="modal.dismiss('Cross click');clearData()"></button>
+          </div>
+          <div class="modal-body">
+           
+
+
+ 
+  <!-- Left Side: Form -->
+  <div class="form-section">
+
+    <mat-stepper>
+      <mat-step label="Step 1" state="phone">
+        <form class="space-y-3 mt-8">
+          <!-- Name and Email Fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+            <div>
+              <label for="name" class="block mb-2 font-medium text-gray-700">Initial Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="userName" 
+                [(ngModel)]="user.userName"
+                class="input-field" 
+                placeholder="Enter your name" 
+                required style="width: 300px;" />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 font-medium text-gray-700">Company Name</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="companyName" 
+                class="input-field"
+                [(ngModel)]="employee.companyName" 
+                placeholder="Enter your Company Name" 
+                required  style="width: 300px;" />
+            </div>
+          </div>
+        </form>
+        <form class="space-y-3 mt-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+            <div>
+              <label for="name" class="block mb-2 font-medium text-gray-700">NIC No</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="employeeNIC" 
+                class="input-field" 
+                placeholder="Enter your NIC Number" 
+                [(ngModel)]="employee.employeeNIC"
+                required style="width: 300px;" />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 font-medium text-gray-700">Company Reg No</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="companyRgNo" 
+                class="input-field" 
+                placeholder="Enter your Company Register Number" 
+                [(ngModel)]="employee.companyRgNo" 
+                required  style="width: 300px;" />
+            </div>
+          </div>
+    
+
+        </form>
+        <div>
+          <button  mat-button matStepperNext style="width: 100px; color: aliceblue;" class="btn btn-primary mt-8">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Step 2" state="chat">
+        <form class="space-y-3 mt-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+            <div>
+              <label for="name" class="block mb-2 font-medium text-gray-700">Email</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="email1" 
+                class="input-field" 
+                [(ngModel)]="email1"
+                placeholder="Enter your Company Email" 
+                required style="width: 300px;" />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 font-medium text-gray-700">Contact No</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="employeeNumber" 
+                class="input-field" 
+                [(ngModel)]="employee.employeeNumber"
+                placeholder="Enter your Company Contact Number" 
+                required  style="width: 300px;" />
+            </div>
+          </div>
+        </form>
+        <form class="space-y-3 mt-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+            <div>
+              <label for="name" class="block mb-2 font-medium text-gray-700">Pofile Photo</label>
+             
+              <div>
+                <label for="file">Upload Profile Picture</label>
+                <input 
+                  type="file" 
+                  class="form-control" 
+                  id="file" 
+                  (change)="onFileSelected($event)" 
+                  accept="image/jpg, image/png"
+                  style="width: 300px;" >
+              
+                <!-- Image preview -->
+                <div *ngIf="previewUrl" class="mt-4">
+                  <img [src]="previewUrl" alt="Selected File" style="max-width: 200px; border: 1px solid #ddd; padding: 5px;">
+                  <button 
+                  type="button" 
+                  class="btn btn-danger mt-2" 
+                  (click)="removeFile()">Remove</button>
+                </div>
+                
+              </div>
+              
+
+
+              
+            </div>
+         
+          </div>
+    
+
+        </form>
+
+
+        <div style="justify-content: space-between;display: flex;">
+          <button mat-button matStepperPrevious style="width: 100px; background-color: red; color: white;" class="mt-8">Back</button>
+          <div style="justify-content: space-between;display: flex;">
+            <button (click)="onSubmit()"  class="btn btn-success mt-8">Submit</button>
+          </div>        </div>
+      </mat-step>
+    
+    
+      <!-- Icon overrides. -->
+    
+    </mat-stepper>
+
+
+
+  </div>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+          </div>
+        </ng-template>
+         
+      </div>
+
+
+
+      <p-toast></p-toast>
+
+      </div>
+
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Company name</th>
+            <th scope="col">Contact No</th>
+            <th scope="col">Email</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let x of employeeApprove; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{x.employeeId}}</td>
+            <td>{{x.companyName}}</td>
+            <td>{{x.employeeNumber}}</td>
+            <td>{{x.companyEmail}}</td>
+            <td>  <p-tag severity="success"  value="Active" [rounded]="true" />
+            </td>
+        
+              <td class="flex gap-3 " >
+                <button class="btn btn-light" (click)="openXl(content1);onViewBtn(x,i);backendPhoto(x.employeeId)">
+                  <img src="assets/search.png" width="22" height="20" alt="Search" />
+                </button>
+                <!-- <button class="btn btn-light">
+                  <img src="assets/user.png" width="22" height="20" alt="User" />
+                </button> -->
+                <button class="btn btn-light" (click)="onDeleteTableItem(x.employeeId)">
+                  <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                </button>
+                                            
+  
+              </td>
+            
+          </tr>
+        
+        </tbody>
+      </table>
+      <ngb-pagination 
+      [collectionSize]="collectionSize" 
+      [(page)]="page" 
+      [pageSize]="pageSize" 
+      (pageChange)="onPageChange($event)">
+  </ngb-pagination>
+    
+    
+
+    </mat-tab>
+    
+    <mat-tab >
+      <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+        <img src="assets/clock.png" alt="Recycling" width="40" height="60">
+        <!-- recycling -->
+    </ng-template>
+    <div class="main flex gap-4 p-4">
+      <!-- Dropdown -->
+       <div class="">
+      <div>
+        <div class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+          <select id="country" name="dropDown" [(ngModel)]="this.dropDown" autocomplete="country-name"
+          class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+          <option value="" disabled selected>Choose Your Search Type</option>
+          <option value="name">Company Name</option>
+          <option value="id">Employee ID</option>
+      </select>
+        </div>
+      </div>
+    
+      <!-- Search Form -->
+  
+      <form class="search-form flex items-center mt-3 gap-2">
+        <input type="text" placeholder="Enter your Search type" [(ngModel)]="this.searchInputPending" name="searchInputPending"
+          class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+        <button type="submit" (click)="searchPending()"
+          class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+          Search
+        </button>
+      </form>
+      <p-toast />
+
+ 
+    </div>
+
+
+
+
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id</th>
+          <th scope="col">Company name</th>
+          <th scope="col">Contact Number</th>
+          <th scope="col">Email</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let x of employeeActive; index as i">
+          <th scope="row">{{i+1}}</th>
+          <td>{{x.employeeId}}</td>
+          <td>{{x.companyName}}</td>
+          <td>{{x.employeeNumber}}</td>
+          <td>{{x.companyEmail}}</td>
+          <td> <p-tag severity="warn" value="Pending" [rounded]="true" /></td>
+          <td class="flex gap-3 " >
+            <button class="btn btn-light"(click)="Approve(x.employeeId)" >
+              <img src="assets/approved.png" width="22" height="20" alt="User" />
+            </button>
+            <button class="btn btn-light"  (click)="openXl(content2);onViewBtn(x,i);backendPhoto(x.employeeId)">
+              <img src="assets/search.png" width="22" height="20" alt="Search" />
+            </button>
+            <button class="btn btn-light" (click)="onDeleteTableItem(x.employeeId)" >
+              <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+            </button>
+                                        
+
+          </td>
+        </tr>
+      
+      </tbody>
+    </table>
+    <ngb-pagination 
+    [collectionSize]="collectionSize1" 
+    [(page)]="page1" 
+    [pageSize]="pageSize1" 
+    (pageChange)="onPageChange2($event)">
+</ngb-pagination>
+
+
+
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+        <img src="assets/recycling.png" alt="Recycling" width="40" height="60">
+        <!-- recycling -->
+    </ng-template>
+ 
+ 
+      <div class="main flex gap-4 p-4">
+        <!-- Dropdown -->
+         <div class="">
+        <div>
+          <div class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+            <select id="country" name="dropDown" [(ngModel)]="this.dropDown" autocomplete="country-name"
+          class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+          <option value=""selected>Choose Your Search Type</option>
+          <option value="name">Company Name</option>
+          <option value="id">Employee ID</option>
+      </select>
+          </div>
+        </div>
+      
+        <!-- Search Form -->
+    
+        <form class="search-form flex items-center mt-3 gap-2">
+          <input type="text" placeholder="Enter your Search type" [(ngModel)]="this.searchInputInactive" name="searchInputInactive"
+            class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+          <button type="submit" (click)="searchInactive()"
+            class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+            Search
+          </button>
+        </form>
+        <p-toast />
+   
+      </div>
+
+
+
+
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Company name</th>
+            <th scope="col">Contact Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let x of employeeInActive; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{x.employeeId}}</td>
+            <td>{{x.companyName}}</td>
+            <td>{{x.employeeNumber}}</td>
+            <td>{{x.companyEmail}}</td>
+            <td> <span [ngSwitch]="x.requestStatus">
+              <p-tag *ngSwitchCase="'PENDING'" severity="warn" value="Pending" [rounded]="true" />
+              <p-tag *ngSwitchCase="'APPROVED'" severity="success" value="Approved" [rounded]="true" />
+              <p-tag *ngSwitchDefault severity="secondary" value="Unknown" [rounded]="true"  />
+            </span></td>
+            <td class="flex gap-3 " >
+              <button class="btn btn-light"  (click)="openXl(content3);onViewBtn(x,i);backendPhoto(x.employeeId)">
+                <img src="assets/search.png" width="22" height="20" alt="Search" />
+              </button>
+              <button class="btn btn-light" (click)="ActiveEmployee(x.employeeId)">
+                <img src="assets/data-recovery.png" width="22" height="20" alt="User" />
+              </button>
+              <p-confirmPopup></p-confirmPopup>
+
+              <button class="btn btn-light" (click)="confirmDelete(x.employeeId)">
+                <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+              </button>
+                                          
+
+            </td>
+          </tr>
+        
+        </tbody>
+      </table>
+      <ngb-pagination 
+      [collectionSize]="collectionSize2" 
+      [(page)]="page2" 
+      [pageSize]="pageSize2" 
+      (pageChange)="onPageChange3($event)">
+  </ngb-pagination>
+
+    </mat-tab>
+  
+   
+  </mat-tab-group>
+</div>
+  </div>
+
+  <ng-template #content1 let-modal>
+    <p-toast></p-toast>
+    
+    <div class="modal-header flex justify-between items-center border-b pb-2">
+      <h4 class="text-xl font-semibold text-gray-800">Employee Information Id No : {{this.employeeInformation.employeeId}} </h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+  
+    <div class="modal-body p-6">
+      <form class="space-y-6">
+        <!-- Personal Information -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Personal Information</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+        
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Company Name</label>
+              <input type="text" class="input-field" [(ngModel)]="employeeInformation.companyName" name="companyName" style="width: 400px;" placeholder="Enter Company Name" required />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3 justify-between">
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">NIC No</label>
+              <input type="text" class="input-field" style="width: 400px;"[(ngModel)]="employeeInformation.employeeNIC" name="employeeNIC" placeholder="Enter NIC No" required />
+            </div>
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Company Reg No</label>
+              <input type="text" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.companyRgNo" name="companyRgNo" placeholder="Enter Company Reg No" required />
+            </div>
+          </div>
+        </div>
+  
+        <!-- Contact Information -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Contact Information</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Email</label>
+              <input type="email" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.companyEmail" name="companyEmail" placeholder="Enter Email" required />
+            </div>
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Contact No</label>
+              <input type="text" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.employeeNumber" name="employeeNumber" placeholder="Enter Contact No" required />
+            </div>
+          </div>
+        </div>
+  
+        <!-- Profile Picture -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Picture</h5>
+          <div class="flex items-center gap-4">
+            <input type="file" class="form-control" id="file" (change)="onFileSelectedUpdate($event)" accept="image/jpg, image/png">
+            <div *ngIf="previewUrlback" class="border rounded-md p-2">
+              <img [src]="previewUrlback" alt="Profile Picture" class="max-w-xs rounded">
+            </div>
+          </div>
+        </div>
+  
+        <!-- Password Setup -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Password Information</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Password</label>
+              <input type="password" class="input-field" style="width: 400px;" [value]="confirmPassword1" name="password" placeholder="Enter Password" required />
+            </div>
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Confirm Password</label>
+              <input type="password" class="input-field" style="width: 400px;" [value]="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required />
+            </div>
+          </div>
+        </div>
+        
+  
+        <!-- Buttons -->
+        <div class="flex justify-between mt-6">
+          <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+          <div class="flex gap-4">
+
+            <button (click)="onDeleteTableItem(employeeInformation.employeeId);modal.close('Close click')" class="btn btn-danger">Delete Account</button>
+
+          <button (click)="updateEmployee(); updatePhoto()" class="btn btn-warning">Update Account</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+  
+
+  <ng-template #content2 let-modal>
+    <p-toast></p-toast>
+    <div class="modal-header flex justify-between items-center border-b pb-2">
+      <h4 class="text-xl font-semibold text-gray-800">Employee Information Id No : {{this.employeeInformation.employeeId}} </h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+  
+    <div class="modal-body p-6">
+      <form class="space-y-6">
+        <!-- Personal Information -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Personal Information</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+          
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Company Name</label>
+              <input type="text" class="input-field" [(ngModel)]="employeeInformation.companyName" name="companyName" style="width: 400px;" placeholder="Enter Company Name" required />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3 justify-between">
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">NIC No</label>
+              <input type="text" class="input-field" style="width: 400px;"[(ngModel)]="employeeInformation.employeeNIC" name="employeeNIC" placeholder="Enter NIC No" required />
+            </div>
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Company Reg No</label>
+              <input type="text" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.companyRgNo" name="companyRgNo" placeholder="Enter Company Reg No" required />
+            </div>
+          </div>
+        </div>
+  
+        <!-- Contact Information -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Contact Information</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Email</label>
+              <input type="email" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.companyEmail" name="companyEmail" placeholder="Enter Email" required />
+            </div>
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Contact No</label>
+              <input type="text" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.employeeNumber" name="employeeNumber" placeholder="Enter Contact No" required />
+            </div>
+          </div>
+        </div>
+  
+        <!-- Profile Picture -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Picture</h5>
+          <div class="flex items-center gap-4">
+            <input type="file" class="form-control" id="file" (change)="onFileSelectedUpdate($event)" accept="image/jpg, image/png">
+            <div *ngIf="previewUrlback" class="border rounded-md p-2">
+              <img [src]="previewUrlback" alt="Profile Picture" class="max-w-xs rounded">
+            </div>
+          </div>
+        </div>
+  
+        <!-- Password Setup -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Password Information</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Password</label>
+              <input type="password" class="input-field" style="width: 400px;" [value]="confirmPassword1" name="password" placeholder="Enter Password" required />
+            </div>
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Confirm Password</label>
+              <input type="password" class="input-field" style="width: 400px;" [value]="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required />
+            </div>
+          </div>
+        </div>
+  
+        <!-- Buttons -->
+        <div class="flex justify-between mt-6">
+          <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+          <div class="flex gap-4">
+            <button (click)="onPermenetDeleteTableItem(employeeInformation.employeeId);modal.close('Close click')" class="btn btn-danger">Delete account</button>
+
+          <button (click)="Approve(employeeInformation.employeeId);modal.close('Close click')" class="btn btn-success">Approve account</button>
+          <button (click)="updateEmployee(); updatePhoto()" class="btn btn-warning">Update Account</button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+
+
+
+
+
+
+
+  <ng-template #content3 let-modal>
+    <p-toast></p-toast>
+    <div class="modal-header">
+      <div class="flex gap-12 justify-between ">
+      <h4 class="modal-title">Employee ID :{{employeeInformation.employeeId}}</h4>
+      <h4 class="modal-title">Employee Status :
+        <span [ngSwitch]="employeeInformation.requestStatus">
+          <p-tag *ngSwitchCase="'PENDING'" severity="warn" value="Pending" [rounded]="true" />
+          <p-tag *ngSwitchCase="'APPROVED'" severity="success" value="Approved" [rounded]="true" />
+          <p-tag *ngSwitchDefault severity="secondary" value="Unknown" [rounded]="true"  />
+        </span>
+      </h4>
+      </div>
+      <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+  
+    <div class="modal-body p-6">
+      <form class="space-y-6">
+        <!-- Personal Information -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Personal Information</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+         
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Company Name</label>
+              <input type="text" class="input-field" [(ngModel)]="employeeInformation.companyName" name="companyName" style="width: 400px;" placeholder="Enter Company Name" required />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3 justify-between">
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">NIC No</label>
+              <input type="text" class="input-field" style="width: 400px;"[(ngModel)]="employeeInformation.employeeNIC" name="employeeNIC" placeholder="Enter NIC No" required />
+            </div>
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Company Reg No</label>
+              <input type="text" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.companyRgNo" name="companyRgNo" placeholder="Enter Company Reg No" required />
+            </div>
+          </div>
+        </div>
+  
+        <!-- Contact Information -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Contact Information</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Email</label>
+              <input type="email" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.companyEmail" name="companyEmail" placeholder="Enter Email" required />
+            </div>
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Contact No</label>
+              <input type="text" class="input-field" style="width: 400px;" [(ngModel)]="employeeInformation.employeeNumber" name="employeeNumber" placeholder="Enter Contact No" required />
+            </div>
+          </div>
+        </div>
+  
+        <!-- Profile Picture -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Picture</h5>
+          <div class="flex items-center gap-4">
+            <input type="file" class="form-control" id="file" (change)="onFileSelectedUpdate($event)" accept="image/jpg, image/png">
+            <div *ngIf="previewUrlback" class="border rounded-md p-2">
+              <img [src]="previewUrlback" alt="Profile Picture" class="max-w-xs rounded">
+            </div>
+          </div>
+        </div>
+  
+        <!-- Password Setup -->
+      
+  
+        <!-- Buttons -->
+        <div class="flex justify-between mt-6">
+          <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+          <div class="flex gap-4">
+            <button (click)="ActiveEmployee(employeeInformation.employeeId);modal.close('Close click')" class="btn btn-success"> Recover Account</button>
+
+            <button (click)="confirmDelete(employeeInformation.employeeId);modal.close('Close click')" class="btn btn-danger">Delete account</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>

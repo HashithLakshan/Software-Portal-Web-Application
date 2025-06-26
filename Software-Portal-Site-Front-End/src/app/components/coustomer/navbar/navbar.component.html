@@ -1,0 +1,98 @@
+<div class="navbar " style="background-color: #0A0F4C; justify-content: center;align-items: center;">
+  <div class="nav-logo">
+    <a>
+      <a routerLink="/software"> <img src="/assets/logo.png" alt="" width="130px"></a>
+    </a>
+  </div>
+  <div class="nav-menu-mobile" data-status="closed">
+    <div class="search">
+      <div class="search-box">
+        <div class="search-field">
+          <input placeholder="Search..." [(ngModel)]="inPut" name="inPut" class="input" type="text">
+          <div class="search-box-icon">
+            <button class="btn-icon-content" (click)="search()">
+              <i class="search-icon">
+                <svg xmlns="://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+                  <path
+                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                    fill="#fff"></path>
+                </svg>
+              </i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> <i class="menu-toggle fa-solid fa-bars"></i>
+  </div>
+</div>
+<div class="navbar2 " style="background-color: #6985C0; justify-content: center; display: flex;">
+  <ul class="nav-menu">
+    <li class="mr-4">
+    <li class="mr-1"><a routerLink="/software" class="nav-menu-item">Home</a></li>
+    <div class="dropdown">
+      <button class="nav-menu-item">Categories</button>
+      <div class="dropdown-content">
+        <!-- <div *ngFor="let i of categoryPayload">
+          <div class="sub-dropdown" >
+            <a href="#" [routerLink]="['/Categorys', i.categoryId] "> {{ i.categoryName }}</a>
+            <div class="sub-dropdown-content">
+              <a >xxxxxxx</a>
+            </div>
+          </div>
+        </div> -->
+       
+        <div class="dropdown">
+          <button class="dropdown-btn">Categories</button>
+          <div class="dropdown-content">
+            <a *ngFor="let i of categoryPayload" (click)="navigateToCategory(i.categoryId)" style="cursor: pointer;;">
+              {{ i.categoryName }}
+            </a>
+          </div>
+        </div>
+        
+      
+       
+      </div>
+    </div>
+    <li class="mr-1 nav-menu-item">
+      <div class="dropdown">
+        <button class="nav-menu-item">Services</button>
+        <div class="dropdown-content">
+          <div class="sub-dropdown">
+            <a href="#">Category 1</a>
+          </div>
+          <div class="sub-dropdown">
+            <a href="#">Category 2</a>
+          </div>
+          <a href="#">Category 3</a>
+        </div>
+      </div>
+    </li>
+    <li class="mr-1"><a routerLink="/software/about-us" class="nav-menu-item" href="#">About us</a></li>
+
+    <li class="mr-1"><a routerLink="/software/contact-us" class="nav-menu-item" href="#">Contact us</a></li>
+  </ul>
+  <!-- <button [routerLink]="['/login']" class="button1" style="margin: auto;margin-right: 20px;">
+    Sign up
+    <div class="arrow-wrapper">
+      <div class="arrow"></div>
+    </div>
+  </button> -->
+</div>
+
+
+<router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

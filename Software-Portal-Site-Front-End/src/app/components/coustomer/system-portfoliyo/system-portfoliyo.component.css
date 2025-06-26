@@ -1,0 +1,191 @@
+
+
+     body {
+      font-family: 'Muli', sans-serif;
+      background: #95B0FA;
+      margin: 0;
+    }
+    
+    .container {
+      margin-top: 20px;
+    }
+    
+    .carousel-img {
+      height: 600px;
+      width: 100%;
+      object-fit: contain;
+      background-color: #f5f5f5;
+    }
+    
+    .flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+    
+    .left {
+      flex: 1 1 68%;
+      padding: 20px;
+    }
+    
+    .right {
+      flex: 1 1 20%;
+      padding: 20px;
+      border-left: 1px solid #ccc;
+    }
+    
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    @media (max-width: 768px) {
+      .carousel-img {
+        height: 400px;
+      }
+    
+      .flex-container {
+        flex-direction: column;
+        padding: 10px;
+      }
+    
+      .left, .right {
+        flex: 1 1 100%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .carousel-img {
+        height: 300px;
+      }
+    } 
+    
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 90vh; /* Fullscreen height */
+      background-color: #000;
+    }
+    
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; 
+    }
+    
+    .modal-fullscreen {
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+      height: 100vh;
+    }
+    
+    .modal-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 !important;
+    }
+    
+    .carousel-img {
+      height: 600px; /* Set a default height for the images */
+      width: 100%; /* Ensure the image spans the full width of the carousel */
+      object-fit: contain; /* Adjust to contain the image within the available space */
+      background-color: #f5f5f5; /* Add a neutral background color for images with different aspect ratios */
+    }
+    
+    @media (max-width: 768px) {
+      .carousel-img {
+        height: 400px; /* Adjust the height for smaller screens */
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .carousel-img {
+        height: 300px; /* Further reduce the height for very small screens */
+      }
+    }
+    
+    ul {
+      list-style: disc; /* Default style with dots */
+    }
+
+    .side-nav__item1 img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    
+    .side-nav__item1 {
+      display: flex;
+      align-items: center; /* Align image and text vertically */
+      justify-content: center; /* Align image and text horizontally */
+    }
+    
+
+   
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    padding: 20px;
+    }
+    
+    @media (min-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    /* Form */
+    .form-section {
+      padding: 1rem;
+    }
+    
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    
+    .input-field:focus {
+      border-color: #4a90e2;
+    }
+    
+    textarea.input-field {
+      resize: none;
+    }
+    
+    .form-check-input {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+    
+    /* Button */
+    .btn-primary {
+      width: 100%;
+      padding: 10px 20px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background-color: #357ABD;
+    }
+    

@@ -1,0 +1,160 @@
+<div class="flex " style="background-color: #F2C500;">
+  <div class="ml-3 mt-4" style="background-color: #F2C500;  width: 1300px; height:230px;">
+
+    <div class="text ">
+      <h2 class=" font-bold text-3xl  sm:text-5xl ">{{category.categoryName}} <span class="text-indigo-600">Systems !!</span></h2>
+
+    </div>
+
+    <div class="paragraph  mt-4" style="display: flex;">
+      <p style="flex: 1;">
+        {{category.categoryDiscription}}
+      </p>
+
+    </div>
+  </div>
+</div>
+
+  <button class="drawer-toggle" (click)="toggleDrawer()">Menu</button>
+<mat-drawer-container class="mat-drawer-container">
+  <mat-drawer #drawer mode="side" [opened]="isDrawerOpen">
+    <h3 class="mt-1 ml-1">Catagories</h3>
+    <div>
+  <div class="category-item" >
+    <ul  *ngFor="let i of categoryPayload">
+      <li style="cursor: pointer;" (click)="onCategoryClick(i.categoryId); sendCategoryIdToBackend('APPROVED','ACTIVE') " >{{ i.categoryName }}
+      </li>
+      </ul>
+    
+    <!-- Badge showing value (4 in this case, you might replace it with dynamic value) -->
+    <!-- <p-badge class="mt-4 ml-1 mr-3" 
+             style="place-content: start;" 
+             value="{{selectCategoryc}}" size="medium" severity="info">
+    </p-badge> -->
+</div>
+
+  
+    </div>
+
+    <h4  class=" ml-1">price</h4>
+
+
+    <div class="flex flex-col  space-y-4">
+      <!-- Input to adjust slider value -->
+
+
+      <!-- Slider -->
+      <p-slider [(ngModel)]="value" [min]="min" [max]="max" [step]="step" class="w-10 ml-2.5 mt-3" style="cursor: pointer;" (onChange)="slider(requestStatus = 'APPROVED',commonStatus = 'ACTIVE')" >
+      </p-slider>
+
+      <!-- Display current value and range -->
+      <div class="flex justify-between w-full">
+        <p class=" ml-1">Current Value: Rs. {{ value }}</p>
+
+      </div>
+
+
+    </div>
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="card-main"  *ngFor="let profile of combinedProfiles" >
+      <div class="card-img">
+    <div class="card-img">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+         
+          <div class="carousel-inner" *ngIf="profile.images && profile.images.length">
+            <div *ngFor="let image of profile.images; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
+              <img [src]="'data:image/jpeg;base64,' + image" alt="SystemProfile" width="200" 
+              [routerLink]="['/software/system-profile', profile.systemProfile.systemProfilesId]" 
+              style="width: 100%; height: 100%; object-fit: cover; cursor: pointer;">
+            </div>
+          </div>
+          
+          <a class="carousel-control-prev" href="#carouselExampleIndicators"  role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon " aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        
+      </div>      </div>
+      <div class="card-content">
+        <div class="flex">
+          <a  class="router-link">
+            <h6 class="card-title"  [routerLink]="['/software/system-profile',profile.systemProfile.systemProfilesId]" style="margin-left: 10px; cursor: pointer;" >
+              {{ profile.systemProfile.systemProfilesName }} 
+              <p-rating class="" [(ngModel)]="values" [cancel]="false"></p-rating>
+            </h6>
+          </a>
+                    <div class="mt-1">
+            <ul class="side-nav1" style=" justify-content: start;">
+
+              <li class="side-nav__item1" style=" display: flex; ">
+                <img src="/assets/video.png" alt=""  (click)="openFullscreen(videoModals)" width="40px">
+                <ng-template #videoModals let-modal>
+                  <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Video Playback</h5>
+                        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal(modal, videoElement)"></button>
+                      </div>
+                      <div class="modal-body p-0">
+                        <div class="video-container">
+                          <video #videoElement controls autoplay [src]="profile.videoUrl"></video>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+             
+
+            </ul>
+
+          </div>
+
+        </div>
+
+        <!-- <p-chip label="Angular 15" class="mr-2"></p-chip>
+        <p-chip label="Spring Boot" class="mr-2"></p-chip>
+        <p-chip label="Mysql" class="mr-2"></p-chip> -->
+     <p class="card-description" [routerLink]="['/software/system-profile', profile.systemProfile.systemProfilesId]"  style="margin-left: 10px; cursor: pointer;">
+          {{ getShortDescription(profile.systemProfile.systemProfilesDiscription) }}
+         </p>
+
+
+        <ul class="side-nav1" style=" justify-content: start;">
+          <li class="side-nav__item1 " style=" display: flex;">
+            <h3>${{profile.systemProfile.systemProfilesPrice}}</h3>
+          </li>
+          <li class="side-nav__item1 ml-2 " style=" display: flex;">
+            <img src="/assets/shopping-bag.png" [routerLink]="['/coustomer-sign-up', profile.systemProfile.systemProfilesId]" alt="" width="40px">
+
+          </li>
+        
+
+        </ul>
+
+
+
+
+      </div>
+    </div>
+    <p-paginator [first]="page * pageSize"
+             [rows]="pageSize"
+             [totalRecords]="collectionSize"
+             (onPageChange)="onPageChange($event)">
+</p-paginator>
+
+   
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
+  
+ 
