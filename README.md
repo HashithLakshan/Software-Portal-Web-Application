@@ -1,0 +1,2 @@
+#payment Gateway Details Stripped
+stripe.secretKey=sk_test_51QnhUaD6rzc0y8QfoRiWcx1XNMYcQXoVhbn1ME8kvBxrc9GYuYot8tReOvs4aYmIdQS7KffM5vr5qyQNzmB2Qzcq00WMIrMmq7
