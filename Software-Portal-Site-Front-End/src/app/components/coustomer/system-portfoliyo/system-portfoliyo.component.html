@@ -1,0 +1,290 @@
+
+<div class="container">
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button
+        *ngFor="let image of images; let i = index"
+        type="button"
+        [attr.data-bs-target]="'#carouselExampleCaptions'"
+        [attr.data-bs-slide-to]="i"
+        [class.active]="i === 0"
+        [attr.aria-current]="i === 0 ? 'true' : null"
+        [attr.aria-label]="'Slide ' + (i + 1)"
+      ></button>
+    </div>
+    <div class="carousel-inner">
+      <div
+        *ngFor="let image of images; let i = index"
+        class="carousel-item"
+        [class.active]="i === 0"
+      >
+        <img 
+          [src]="'data:image/png;base64,' + image" 
+          class="d-block w-100 carousel-img" 
+          alt="System Profile Image" 
+        />
+        <div class="carousel-caption d-none d-md-block">
+          <h5>{{ i + 1 }}</h5>
+          <p> {{ i + 1 }}.</p>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+
+<div class="flex-container ">
+  <div class="left">
+    <div >
+      <div class="flex" style="justify-content: space-between;">
+        <div>
+      <h2 style="font-weight: bold;" class="mt-4" >Discription</h2>
+      <h4 style="font-weight: bold;" class="mt-4" >About:</h4>
+        </div>
+        <div class="mt-4" style="display: flex; flex-direction: column;  text-align: center;">
+          <h3>${{systemProfile.systemProfilesPrice}}</h3>
+          <ul class="mt-2 " style="margin-right: 20px;">
+            <li class="side-nav__item1" style="display: flex; ">
+              <img (click)="openFullscreen(videoModals)" src="/assets/video.png" style="cursor: pointer;
+               transition: transform 0.3s;" alt="Video Icon" width="40px" class="video-thumbnail" />
+            </li>
+          </ul>
+        
+          <ng-template #videoModals let-modal>
+            <div class="modal-dialog modal-fullscreen">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Video Playback</h5>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal(modal, videoElement)"></button>
+                </div>
+                <div class="modal-body p-0">
+                  <div class="video-container">
+                    <video #videoElement controls autoplay [src]="videoUrl"></video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+        
+    
+    <!-- </div> -->
+    </div>
+      <!-- <ul class="side-nav1 flex gap-3" style=" justify-content: start;">
+        <li class="side-nav__item1" style=" display: flex; ">
+          <img (click)="openFullscreen(videoModals)" src="/assets/video.png" style="cursor: pointer;   transition: transform 0.3s;" alt="Video Icon" width="40px" class="video-thumbnail " />
+
+          <ng-template #videoModals let-modal>
+            <div class="modal-dialog modal-fullscreen">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Video Playback</h5>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal(modal, videoElement)"></button>
+                </div>
+                <div class="modal-body p-0">
+                  <div class="video-container">
+                    <video #videoElement controls autoplay [src]="videoUrl"></video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          
+
+        </li>
+        <li class="side-nav__item1" style=" display: flex; ">
+          <img src="/assets/telephone.png" alt=""  style="cursor: pointer; border-radius: 10px;
+          transition: transform 0.3s;
+         "width="60px">
+        </li>
+
+      </ul> -->
+    
+
+
+    <p style="line-height: 30px;">{{systemProfile.systemProfilesDiscription}}</p>
+    </div>
+    <div class="flex" style="display: flex;">
+      <!-- Left Section with Increased Width -->
+      <div
+        class="p-1"
+        style="flex-basis: 70%;  color: black;"
+      >
+        <h2 style="font-weight: bold;">Features</h2>
+        <ul >
+          <li *ngFor="let feature of systemFeatures1">
+            {{ feature.systemFeatureDiscripion }}
+          </li>
+        </ul>
+      </div>
+     
+    </div>
+   
+    <div class="d-grid">
+      <button class="btn btn-info" type="button"[routerLink]="['/coustomer-sign-up',systemProfile.systemProfilesId]" > 📞 Contact Us !!</button>
+   
+      
+<button class="btn btn-warning mt-2" (click)="openFirstModal(firstModal)">Buy Now !!</button>
+
+<!-- First Modal -->
+<ng-template #firstModal let-modal>
+  <div class="modal-header">
+    <button type="button" class="btn-close  btn-danger" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body " >
+    <button class="btn d-flex align-items-center mt-4 mb-4" (click)="openSecondModal(secondModal);modal.dismiss()">
+      <img src="assets/cashless-payment.png" alt="First Icon" width="90" height="90" class="me-2">
+    </button>
+    
+    <!-- Button 2 with an Image -->
+    <button class="btn  d-flex align-items-center ms-3 mt-4 mb-4 " (click)="openSecondModal(thirdModal);modal.dismiss()">
+      <img src="assets/batch-processing.png" alt="Second Icon" width="90" height="90" class="me-2">
+    </button>
+  </div>
+</ng-template>
+
+<!-- Second Modal -->
+<ng-template #secondModal let-modal>
+  <div class="modal-header">
+    <button type="button" class="btn-close btn-danger" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body" style=" display: block; ">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ml-4 mt-4 mb-4">
+    <div>
+      <label for="name" class="block mb-2 font-medium text-gray-700">Your Name</label>
+      <input 
+        type="text" 
+        id="name" 
+        name="customerName" 
+        class="input-field" 
+        placeholder="Enter your name" 
+        [(ngModel)]="payment.name"
+        required style="width: 300px;" />
+    </div>
+    </div>
+
+    <button type="button" class="btn btn-success ml-4 mb-4" (click)="getPayment();modal.dismiss()">Send</button>
+
+
+  </div>
+</ng-template>
+
+<!-- Third Modal -->
+<ng-template #thirdModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Third Modal</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ml-4 mt-4 mb-4">
+    <div>
+      <label for="name" class="block mb-2 font-medium text-gray-700">Perchase Id</label>
+      <input 
+        type="text" 
+        id="name" 
+        name="perchaseId" 
+        class="input-field" 
+        placeholder="Enter your name" 
+        [(ngModel)]="perchaseId"
+        required style="width: 300px;" />
+    </div>
+    <div>
+      <label for="file">Upload your Payment resit </label>
+      <input 
+        type="file" 
+        class="form-control" 
+        id="fileInput" 
+        (change)="onFileSelected($event)" 
+        accept="application/pdf"
+        style="width: 300px;" >
+    </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-success ml-4 mb-4" style="width: 100px;" (click)="onUploadPdf()">Send</button>
+
+</ng-template>
+
+    </div>
+
+  </div>
+
+  <div class="right">
+    <h2>{{systemProfile.systemProfilesName}}</h2>
+    <p-rating [(ngModel)]="values" [cancel]="false"></p-rating>
+
+    <h2 class="mt-4">Bussiness Type</h2>
+    <ul>
+      <li style="font-size: 20px;">{{systemProfile.categoryDto?.categoryName}}</li>
+    </ul>
+
+    <h2 class="mt-4">Technologies</h2>
+    
+    <div class="chips">
+      <p-chip  
+        *ngFor="let x of systemChips" 
+        [style]="{'font-size': '15px', 'padding': '6px 15px'}" 
+        label="" 
+        class="mr-1 custom-chip">
+        {{x.chipName}}
+      </p-chip>
+    </div>
+
+
+    <form class="bg-aqua p-2 pt-3 border-yellow-500">
+      <div class="space-y-4">
+        <div class="flex flex-wrap -mx-3">
+
+          <div class="w-full md:w-1/2 px-3">
+            <div class="mb-4">
+   
+    <input type="text" placeholder="Perchase Id" name="perchaseId1" [(ngModel)] = "perchaseId1"
+                class="w-full h-11 bg-gray-50 border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/2 px-3">
+            <div class="mb-4">
+   
+    <input type="text" placeholder="Subject" name="subject" [(ngModel)] = "issueMessages.subject"
+                class="w-full h-11 bg-gray-50 border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+            </div>
+          </div>
+
+
+        </div>
+
+        <div>
+          <textarea placeholder="Write Your Message" name="body"  [(ngModel)]="issueMessages.body"
+            class="w-full bg-gray-50 border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            rows="3"></textarea>
+        </div>
+
+        <div class="text-center">
+          <button type="button" (click)="submitMessage()"
+            class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-yellow-600 transition">
+            Send Now!
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

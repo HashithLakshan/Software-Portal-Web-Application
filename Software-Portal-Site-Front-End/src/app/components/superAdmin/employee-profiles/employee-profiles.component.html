@@ -1,0 +1,1438 @@
+<div class="flex">
+  <div class="container">
+
+    <mat-tab-group  (selectedTabChange)="onTabClick($event)" class="mt-4">
+      <mat-tab>
+        <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+          <img src="assets/computer.png" alt="Recycling" width="40" height="60">
+          <!-- recycling -->
+        </ng-template>
+
+        <div class="main flex gap-4 p-4">
+          <!-- Dropdown -->
+          <div class="">
+            <div class="flex justify-between">
+              <div
+                class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                <select id="country" name="dropDown" [(ngModel)]="dropDown" autocomplete="country-name"
+                  class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                  <option value="" disabled selected>Choose Your Search Type</option>
+                  <option value="System ID">System ID</option>
+                  <option value="Employee ID">Employee ID</option>
+                </select>
+
+              </div>
+              <button type="button" (click)="getAllFilterSystemProfileAllSuperAdminApprove('ACTIVE','APPROVED')" class="btn btn-warning">Company Systems</button>
+
+
+
+            </div>
+
+            <!-- Search Form -->
+            <div class="mt-3 flex items-center" style="justify-content: space-between;">
+              <!-- Search Form -->
+              <form class="search-form flex items-center gap-2">
+                <input type="text" [(ngModel)]="searchInput" placeholder="Enter your Search type" name="searchInput"
+                  class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+                <button type="submit"(click)="search('ACTIVE', 'APPROVED')"
+
+                  class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                  Search
+                </button>
+              </form>
+
+
+              <button type="button" class="btn btn-success flex gap-1" style="margin-left: 500px;"
+                (click)="openLg(content);;clearVideoAndImages();clearData();clearDta()">
+                <img src="assets/add-user.png" alt="Add" width="25" height="20" style="margin-right: 5px;">
+                Create Profile
+              </button>
+            </div>
+
+
+            <ng-template #content let-modal>
+              <p-toast />
+              <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="btn-close btn-danger "  style="background-color: red;" aria-label="Close"
+                  (click)="modal.dismiss('Cross click');clearDta();clearData();
+                  "></button>
+              </div>
+              <div class="modal-body">
+
+
+
+
+
+
+
+
+                <mat-horizontal-stepper>
+                  <mat-step label="Step 1" state="phone">
+
+
+                    <form class="space-y-6">
+                      <!-- Personal Information -->
+                      <div class="bg-gray-100 p-4 rounded-lg">
+                        <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Information</h5>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+                          <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Employee Id</label>
+                            <input type="text" name="employeeId" class="input-field" [(ngModel)]="employeeId"
+                              placeholder="Enter Name" style="width: 400px;" required />
+                          </div>
+                          <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Profile Name</label>
+                            <input type="text" class="input-field" name="companyName" style="width: 400px;"
+                              [(ngModel)]="systemProfile.systemProfilesName" placeholder="Enter Company Name"
+                              required />
+                          </div>
+                        </div>
+
+                        <div class="grid mt-3 grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+                          <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Prise </label>
+                            <input type="text" name="systemProfilesPrice" class="input-field"
+                              [(ngModel)]="systemProfile.systemProfilesPrice" placeholder="Enter Prise"
+                              style="width: 400px;" required />
+                          </div>
+
+                        </div>
+
+
+
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3 justify-between">
+                          <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Select the Category</label>
+                            <select class="input-field p-2 border rounded-md" [(ngModel)]="categoryValue"
+                              name="categoryValue" style="width: 400px;" required>
+                              <option value="" selected>Select Your Category</option>
+                              <option *ngFor="let x of category;" [value]="x.categoryId">{{x.categoryName}}</option>
+
+                            </select>
+                          </div>
+                          <!-- <div>
+                            <label class="block mb-2 text-gray-700 font-medium">Select the SubCategory</label>
+                            <select class="input-field  p-2 border rounded-md" [(ngModel)]="SubaCategoryValue"
+                              style="width: 400px;" name="SubaCategoryValue" required>
+                              <option value="" selected>Select Your SubCategory</option>
+                              <option *ngFor="let x of SubCategory;" [value]="x.subCategoryId">{{x.subCategoryName}}
+                              </option>
+
+                            </select>
+                          </div> -->
+                        </div>
+
+
+
+
+                      </div>
+
+                      <!-- Contact Information -->
+                      <div class="bg-gray-100 p-4 rounded-lg">
+                        <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Description</h5>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+                          <div>
+                            <textarea class="input-field" style="width: 800px; height: 150px;"
+                              name="systemProfilesDiscription" [(ngModel)]="systemProfile.systemProfilesDiscription"
+                              placeholder="Enter Description" required></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="bg-gray-100 p-4 rounded-lg">
+                        <h5 class="text-lg font-medium text-gray-700 mb-3">Select and Preview Video</h5>
+
+                        <!-- Video Upload Input -->
+                         <p-toast></p-toast>
+                        <div>
+                          <label class="block mb-2 text-gray-700 font-medium">Select a Video</label>
+                          <input type="file" accept="video/*" (change)="onVideoSelected($event)"
+                            class="input-field w-full border p-2 rounded-lg bg-white shadow-md">
+                        </div>
+
+                        <!-- Video Preview -->
+                        <div class="mt-4" *ngIf="videoUrl">
+                          <video [src]="videoUrl" class="rounded-lg shadow-lg" controls width="100"></video>
+                        </div>
+                      </div>
+
+                      <div>
+                        <button mat-button matStepperNext (click)=" saveProfile()">Next</button>
+                      </div>
+                      <div class="flex justify-between mt-6">
+                        <button type="button" class="btn btn-danger" (click)="modal.close('Close click');clearDta()">Close</button>
+                        <div class="flex gap-4">
+
+
+
+
+                        </div>
+                      </div>
+
+
+
+
+
+                    </form>
+
+
+
+
+
+
+
+
+
+                  </mat-step>
+                  <mat-step label="Step 2" state="chat">
+
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                      <h5 class="text-lg font-medium text-gray-700 mb-3">Systems Photos</h5>
+                      <div class="flex items-center gap-8">
+                        <div>
+                          <input type="file" class="form-control" id="file" (change)="onFileSelected($event)"
+                            accept="image/jpg, image/png" style="width: 400px;">
+                          <div *ngIf="previewUrl">
+            
+                            <p-image [src]="previewUrl" alt="Image" width="200" [preview]="true" />
+                            <button type="button" class="btn btn-danger mt-2" (click)="removeFile()">Remove</button>
+            
+                          </div>
+                        </div>
+            
+                        <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+                          <h2 class="text-lg font-semibold mb-4 text-gray-700">Image Gallery</h2>
+                          <div class="bg-white p-3 rounded-lg h-80 overflow-auto border border-gray-300">
+                            <div *ngFor="let img of image1; let i = index" class="flex items-center justify-between mb-3 p-2 border-b gap-2 border-gray-200">
+                              <span class="text-gray-600 font-medium">{{img.placeNumber}}.</span>
+                        
+                              <!-- Use img tag for rendering Base64 image -->
+                              <img [src]="'data:image/jpeg;base64,' + img.base64Image" alt="System Image" width="150" class="rounded-lg shadow-md" />
+                        
+                              <button 
+                                type="button" 
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-4 py-1 rounded"
+                                (click)="open(content)" >
+                                Update
+                              </button>
+                                    <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+                          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p-toast></p-toast>
+                          <div>
+                            <input type="file" class="form-control" id="file" (change)="onFileSelectedUpdated($event)"
+                              accept="image/jpg, image/png" style="width: 400px;">
+                            <div *ngIf="previewUrlUpdate">
+                
+                              <p-image [src]="previewUrlUpdate" alt="Image" width="200" [preview]="true" />
+                              <button type="button" class="btn btn-danger mt-2" (click)="removeFileUpdate()">Remove</button>
+                
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn  btn-outline-warning" (click)="c('Save click');systemPictureUpdatre(img.imageId,img.systemProfilesId)">Update</button>
+                        </div>
+                      </ng-template>
+                            </div>
+                            
+                          </div>
+                          <button 
+                                type="button" (click)="deletePhto(image1[image1.length -1].imageId,image1[image1.length -1].systemProfilesId)"
+                                class="bg-red-500 mt-4 hover:bg-red-600 text-white font-medium px-4 py-1 rounded"
+                                 >
+                                Delete
+                              </button>
+                        </div>
+                        
+                        
+            
+                      </div>
+                      <button class="btn btn-warning w-2" (click)="systemPictureUpload()">Update</button>
+            
+            
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-lg mt-4">
+                      <div class="flex justify-between">
+                        <h5 class="text-lg font-medium text-gray-700 mb-3">Systems Features</h5>
+                        <h5 class="text-lg font-medium text-gray-700 mb-3">Technologies</h5>
+
+                      </div>
+                      <div class="flex justify-between">
+                        <div>
+                          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+                            <div>
+                              <textarea class="input-field" style="width: 400px; height: 150px;"
+                                name="systemFeatureDiscripion" [(ngModel)]="features.systemFeatureDiscripion"
+                                placeholder="Enter Description" required></textarea>
+                            </div>
+                          </div>
+                          <div class="flex-2 mt-4"
+                            style="height: 300px; width: 500px; overflow: auto;">
+
+                            <ol  *ngFor="let x of systemFeatures;">
+                              <li class="flex">{{x.systemFeatureDiscripion}} 
+                                <button class="btn btn-danger ml-3 " (click)="DeleteFeature(x.systemFeatureId,x.systemProfileDto?.systemProfilesId)" >Remove
+                                </button>
+                              </li>
+                            </ol>
+
+
+
+                          </div>
+                          <button class="btn btn-primary mt-4 w-3" (click)="saveFeatures()">Upload</button>
+
+                        </div>
+
+
+                        <div>
+                          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+                            <div>
+                              <textarea class="input-field" style="width: 400px; height: 150px;"
+                                name="chipName" [(ngModel)]="technolofies.chipName"
+                                placeholder="Enter Description" required></textarea>
+                            </div>
+                          </div>
+                          <div class="flex-2 mt-4 "
+                            style=" height: 300px; width: 200px; overflow: auto;">
+                            <ol  *ngFor="let x of technolofiesget;">
+                              <li class="flex">{{x.chipName}}
+
+
+                                <button class="btn btn-danger ml-3 h-2"(click)="DeleteChips(x.systemProfileChipId,x.systemProfileDto?.systemProfilesId)" >Remove
+                                </button>
+                
+                              </li>
+                            </ol>
+
+
+
+                          </div>
+                          <button class="btn btn-primary mt-4 w-4" (click)="saveChips()">Upload</button>
+
+                        </div>
+
+
+
+                      </div>
+                    </div>
+
+
+
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                  </mat-step>
+                
+
+                 
+                  <!-- Icon overrides. -->
+                 
+                </mat-horizontal-stepper>
+
+
+
+
+
+
+
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Close click');this.clearDta();
+                ">Close</button>
+              </div>
+            </ng-template>
+
+          </div>
+
+
+
+
+        </div>
+
+
+
+        <table class="table">
+          <p-toast />
+
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Profile Id</th>
+              <th scope="col">Employee Id</th>
+              <th scope="col">Profile Name</th>
+              <th scope="col">Category Name</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of systemProfileApprove; index as i">
+              <th scope="row">{{1+i}}</th>
+              <td>{{x.systemProfilesId}}
+              <td>{{x.employeeDto?.employeeId}}</td>
+              <td>{{x.systemProfilesName}}</td>
+              <td>{{x.categoryDto?.categoryName}}</td>
+              <td> <p-tag severity="success" value="Active" [rounded]="true" />
+              </td>
+
+              <td class="flex gap-3 ">
+                <button class="btn btn-light" (click)="openXl(content1);onViewBtn(x,i);systemVideo(x.systemProfilesId);getBySystemChips(x.systemProfilesId);getBySystemFeatures(x.systemProfilesId);fetchImages(x.systemProfilesId)">
+                  <img src="assets/search.png" width="22" height="20" alt="Search" />
+                </button>
+                <!-- <button class="btn btn-light">
+                  <img src="assets/user.png" width="22" height="20" alt="User" />
+                </button> -->
+                <button class="btn btn-light" (click)="turnInctive(x.systemProfilesId)">
+                  <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                </button>
+
+
+              </td>
+
+            </tr>
+
+          </tbody>
+        </table>
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+          (pageChange)="onPageChange($event)">
+        </ngb-pagination>
+
+
+
+
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+          <img src="assets/ux.png" alt="Recycling" width="40" height="60">
+        </ng-template>
+        <p-toast></p-toast>
+        <div class="  gap-4 p-4">
+          <div class="">
+            <div class="flex justify-between">
+              <div
+                class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                <select id="country" name="dropDown" [(ngModel)]="dropDown" autocomplete="country-name"
+                  class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                  <option value="" selected>Choose Your Search Type</option>
+                  <option value="System ID">System ID</option>
+                  <option value="Employee ID">Employee ID</option>
+                </select>
+              </div>
+              <button type="button" (click)="etAllFilterSystemProfileAllSuperAdminPending('ACTIVE','PENDING')" class="btn btn-warning">Company Systems</button>
+
+            </div>
+
+            <!-- Search Form -->
+
+            <form class="search-form flex items-center mt-3 gap-2">
+              <div>
+              <input type="text" placeholder="Enter your Search type" [(ngModel)]="searchInput" name="searchInput"
+                class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+                <button type="submit"(click)="search('ACTIVE', 'PENDING')"
+                class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                Search
+              </button>
+              </div>
+              <div></div>
+            </form>
+
+          </div>
+
+
+
+
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Profile Id</th>
+              <th scope="col">Employee Id</th>
+              <th scope="col">Profile Name</th>
+              <th scope="col">Category Name</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of systemProfilePending; index as i">
+              <th scope="row">{{i+1}}</th>
+              <td>{{x.systemProfilesId}}
+              <td>{{x.employeeDto?.employeeId}}</td>
+              <td>{{x.systemProfilesName}}</td>
+              <td>{{x.categoryDto?.categoryName}}</td>
+              <td> <p-tag severity="warn" value="Pending" [rounded]="true" /></td>
+              <td class="flex gap-3 ">
+                <!-- <button class="btn btn-light" (click)="turnApprove(x.systemProfilesId)">
+                  <img src="assets/approved.png" width="22" height="20" alt="User" />
+                </button> -->
+                <button class="btn btn-light" (click)="openXl(content2);onViewBtn(x,i);systemVideo(x.systemProfilesId);getBySystemChips(x.systemProfilesId);getBySystemFeatures(x.systemProfilesId);fetchImages(x.systemProfilesId)">
+                  <img src="assets/search.png" width="22" height="20" alt="Search" />
+                </button>
+                <button class="btn btn-light" (click)="turnInctive(x.systemProfilesId)">
+                  <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                </button>
+
+
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+        <ngb-pagination [collectionSize]="collectionSize1" [(page)]="page1" [pageSize]="pageSize1"
+          (pageChange)="onPageChange2($event)">
+        </ngb-pagination>
+
+
+
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+          <img src="assets/document.png" alt="Recycling" width="40" height="60">
+          <!-- recycling -->
+        </ng-template>
+
+
+        <div class="main  gap-4 p-4">
+          <!-- Dropdown -->
+          <div class="">
+            <div class="flex justify-between">
+              <div
+                class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                <select id="country" name="dropDown" [(ngModel)]="dropDown" autocomplete="country-name"
+                  class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                  <option value="" selected>Choose Your Search Type</option>
+                  <option value="System ID">System ID</option>
+                  <option value="Employee ID">Employee ID</option>
+                </select>
+              </div>
+              <button type="button" (click)="getAllFilterSystemProfileAllSuperAdminInactive('INACTIVE')" class="btn btn-warning">Company Systems</button>
+
+            </div>
+
+            <!-- Search Form -->
+
+            <form class="search-form flex items-center mt-3 gap-2">
+              <div>
+              <input type="text" placeholder="Enter your Search type" [(ngModel)]="searchInput" name="searchInput"
+                class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+                <button type="submit"(click)="search('INACTIVE', '')"
+                class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                Search
+              </button>
+              </div>
+              <div></div>
+            </form>
+
+          </div>
+
+
+
+          <p-toast></p-toast>
+
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Profile Id</th>
+              <th scope="col">Employee Id</th>
+              <th scope="col">Profile Name</th>
+              <th scope="col">Category Name</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of sysytmProfileInActive; index as i">
+              <th scope="row">{{i+1}}</th>
+              <td>{{x.systemProfilesId}}
+              <td>{{x.employeeDto?.employeeId}}</td>
+              <td>{{x.systemProfilesName}}</td>
+              <td>{{x.categoryDto?.categoryName}}</td>
+              <td>  <span [ngSwitch]="x.requestStatus">
+                <p-tag *ngSwitchCase="'PENDING'" severity="warn" value="Pending" [rounded]="true" />
+                <p-tag *ngSwitchCase="'APPROVED'" severity="success" value="Approved" [rounded]="true" />
+                <p-tag *ngSwitchDefault severity="secondary" value="Unknown" [rounded]="true"  />
+              </span></td>
+              <td class="flex gap-3 ">
+                <button class="btn btn-light" (click)="openXl(content3);onViewBtn(x,i);systemVideo(x.systemProfilesId);getBySystemChips(x.systemProfilesId);getBySystemFeatures(x.systemProfilesId);fetchImages(x.systemProfilesId)">
+                  <img src="assets/search.png" width="22" height="20" alt="Search" />
+                </button>
+                <button class="btn btn-light" (click)="turnActive(x.systemProfilesId)">
+                  <img src="assets/data-recovery.png" width="22" height="20" alt="User" />
+                </button>
+
+                <button class="btn btn-light" (click)="confirmDelete(x.systemProfilesId)">
+                  <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                </button>
+
+
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+        <ngb-pagination [collectionSize]="collectionSize2" [(page)]="page2" [pageSize]="pageSize2"
+          (pageChange)="onPageChange3($event)">
+        </ngb-pagination>
+
+      </mat-tab>
+
+
+    </mat-tab-group>
+  </div>
+</div>
+
+<ng-template #content1 let-c="close" let-d="dismiss" >
+  <p-toast></p-toast>
+
+  <div class="modal-header flex justify-between items-center border-b pb-2">
+    <h4 class="text-xl font-semibold text-gray-800">System Profile Id No :{{this.systemProfileUpdate.systemProfilesId}} </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click');clearVideoAndImages();clearData();clearDta()"></button>
+  </div>
+
+  <div class="modal-body p-6">
+
+
+    <mat-horizontal-stepper>
+      <mat-step label="Step 1" state="phone">
+
+
+        <form class="space-y-6">
+          <!-- Personal Information -->
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Information</h5>
+           
+
+            <div class="grid mt-3 grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Prise </label>
+                <input type="text" name="systemProfilesPrice" class="input-field"
+                  [(ngModel)]="systemProfileUpdate.systemProfilesPrice" placeholder="Enter Prise"
+                  style="width: 400px;" required />
+              </div>
+
+            </div>
+
+
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3 justify-between">
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Select the Category</label>
+                <select class="input-field p-2 border rounded-md" [(ngModel)]="categoryValueUpdate"
+                  name="categoryValueUpdate" style="width: 400px;" required>
+                  <option value="{{categoryValueUpdate}}" disabled   selected> Currnt :{{categoryValueUpdate}}</option>
+                  <option *ngFor="let x of category;" [value]="x.categoryId">{{x.categoryName}}</option>
+
+                </select>
+              </div>
+              <!-- <div>
+                <label class="block mb-2 text-gray-700 font-medium">Select the SubCategory</label>
+                <select class="input-field  p-2 border rounded-md" [(ngModel)]="SubaCategoryValueUpdate"
+                  style="width: 400px;" name="SubaCategoryValueUpdate" required>
+                  <option value="{{SubaCategoryValueUpdate}}"  disabled selected> Currnt :{{SubaCategoryValueUpdate}}</option>
+                  <option *ngFor="let x of SubCategory;" [value]="x.subCategoryId">{{x.subCategoryName}}
+                  </option>
+
+                </select>
+              </div> -->
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3" style="justify-content: space-between;">
+            
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Profile Name</label>
+                <input type="text" class="input-field" name="companyName" style="width: 400px;"
+                  [(ngModel)]="systemProfileUpdate.systemProfilesName" placeholder="Enter Company Name"
+                  required />
+              </div>
+            </div>
+
+
+
+          </div>
+
+          <!-- Contact Information -->
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Description</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+              <div>
+                <textarea class="input-field" style="width: 800px; height: 150px;"
+                  name="systemProfilesDiscription" [(ngModel)]="systemProfileUpdate.systemProfilesDiscription"
+                  placeholder="Enter Description" required></textarea>
+              </div>
+            </div>
+
+            <button  class="btn btn-warning" (click)="updateProfile()">Update</button>
+
+          </div>
+
+
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Select and Preview Video</h5>
+
+            <!-- Video Upload Input -->
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Select a Video</label>
+              <input type="file" accept="video/*" (change)="onVideoSelected($event)"
+                class="input-field w-full border p-2 rounded-lg bg-white shadow-md">
+            </div>
+
+            <!-- Video Preview -->
+            <div class="mt-4" *ngIf="videoUrl">
+              <video [src]="videoUrl" class="rounded-lg shadow-lg" controls width="100"></video>
+            </div>
+            <button  class="btn btn-warning mt-2" (click)="videoUpload(this.systemProfileUpdate.systemProfilesId)">Update</button>
+
+          </div>
+
+          <div>
+            <button mat-button matStepperNext >Next</button>
+          </div>
+         
+
+
+
+
+        </form>
+
+
+
+
+
+
+
+
+
+      </mat-step>
+      <mat-step label="Step 2" state="chat">
+
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Systems Photos</h5>
+          <div class="flex items-center gap-8">
+            <div>
+              <input type="file" class="form-control" id="file" (change)="onFileSelected($event)"
+                accept="image/jpg, image/png" style="width: 400px;">
+              <div *ngIf="previewUrl">
+
+                <p-image [src]="previewUrl" alt="Image" width="200" [preview]="true" />
+                <button type="button" class="btn btn-danger mt-2" (click)="removeFile()">Remove</button>
+
+              </div>
+            </div>
+
+            <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+              <h2 class="text-lg font-semibold mb-4 text-gray-700">Image Gallery</h2>
+              <div class="bg-white p-3 rounded-lg h-80 overflow-auto border border-gray-300">
+                <div *ngFor="let img of image1; let i = index" class="flex items-center justify-between mb-3 p-2 border-b gap-2 border-gray-200">
+                  <span class="text-gray-600 font-medium">{{img.placeNumber}}.</span>
+            
+                  <!-- Use img tag for rendering Base64 image -->
+                  <img [src]="'data:image/jpeg;base64,' + img.base64Image" alt="System Image" width="150" class="rounded-lg shadow-md" />
+            
+                  <button 
+                    type="button" 
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-4 py-1 rounded"
+                    (click)="open(content)" >
+                    Update
+                  </button>
+                        <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+              <p-toast></p-toast>
+              <div>
+                <input type="file" class="form-control" id="file" (change)="onFileSelectedUpdated($event)"
+                  accept="image/jpg, image/png" style="width: 400px;">
+                <div *ngIf="previewUrlUpdate">
+    
+                  <p-image [src]="previewUrlUpdate" alt="Image" width="200" [preview]="true" />
+                  <button type="button" class="btn btn-danger mt-2" (click)="removeFileUpdate()">Remove</button>
+    
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn  btn-outline-warning" (click)="c('Save click');systemPictureUpdatre(img.imageId,img.systemProfilesId)">Update</button>
+            </div>
+          </ng-template>
+                </div>
+                
+              </div>
+              <button 
+                    type="button" (click)="deletePhto(image1[image1.length -1].imageId,image1[image1.length -1].systemProfilesId)"
+                    class="bg-red-500 mt-4 hover:bg-red-600 text-white font-medium px-4 py-1 rounded"
+                     >
+                    Delete
+                  </button>
+            </div>
+            
+            
+
+          </div>
+          <button class="btn btn-warning w-2" (click)="systemPictureUpload()">Update</button>
+
+
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg mt-4">
+          <div class="flex justify-between">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Systems Features</h5>
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Technologies</h5>
+
+          </div>
+
+     
+          
+    
+
+
+
+
+
+
+
+
+
+
+          <div class="flex justify-between">
+            <div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+                <div>
+                  <textarea class="input-field" style="width: 400px; height: 150px;"
+                    name="systemFeatureDiscripion" [(ngModel)]="featuresUpdate.systemFeatureDiscripion"
+                    placeholder="Enter Description" required></textarea>
+                </div>
+              </div>
+              <div class="flex-2 mt-4"
+                style=" height: 300px; width: 500px; overflow: auto;">
+
+                <ol  *ngFor="let x of systemFeatures;">
+                  <li class="flex">{{x.systemFeatureDiscripion}} 
+                    <button class="btn btn-danger ml-3 " (click)="DeleteFeature(x.systemFeatureId,x.systemProfileDto?.systemProfilesId)" >Remove
+                    </button>
+                  </li>
+                </ol>
+
+
+
+              </div>
+              <button class="btn btn-warning w-4 mt-2" (click)="saveFeatures()" >Update</button>
+
+            </div>
+
+
+            <div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+                <div>
+                  <textarea class="input-field" style="width: 400px; height: 150px;"
+                    name="chipName" [(ngModel)]="technolofiesUpdate.chipName"
+                    placeholder="Enter Description" required></textarea>
+                </div>
+              </div>
+              <div class="flex-2 mt-4 "
+                style=" height: 300px; width: 300px; overflow: auto;">
+                <ol  *ngFor="let x of technolofiesget;">
+                  <li class="flex">{{x.chipName}}
+
+
+                    <button class="btn btn-danger ml-3 h-10 w-4"(click)="DeleteChips(x.systemProfileChipId,x.systemProfileDto?.systemProfilesId)" >Remove
+                    </button>
+    
+                  </li>
+                </ol>
+
+
+
+              </div>
+              <button class="btn btn-warning w-5" (click)="saveChips()">Update</button>
+
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+       
+      </mat-step>
+    
+
+     
+      <!-- Icon overrides. -->
+     
+    </mat-horizontal-stepper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="flex justify-between mb-2">
+      <button type="button" class="btn btn-danger ml-4" (click)="d('Cross click');clearVideoAndImages();clearData();clearDta()">Close</button>
+      <div class="flex gap-4 mr-4">
+  
+        <button (click)="turnInctive(systemProfileUpdate.systemProfilesId);d('Cross click');clearVideoAndImages();clearData();clearDta()" class="btn btn-danger">Delete account</button>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
+
+
+<ng-template #content2 let-modal>
+  <p-toast></p-toast>
+  <div class="modal-header flex justify-between items-center border-b pb-2">
+    <h4 class="text-xl font-semibold text-gray-800">Employee Information Id No : </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click');clearVideoAndImages();clearData();clearDta()"></button>
+  </div>
+
+  <div class="modal-body p-6">
+
+    <mat-horizontal-stepper>
+      <mat-step label="Step 1" state="phone">
+
+
+        <form class="space-y-6">
+          <!-- Personal Information -->
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Information</h5>
+           
+
+            <div class="grid mt-3 grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Prise </label>
+                <input type="text" name="systemProfilesPrice" class="input-field"
+                  [(ngModel)]="systemProfileUpdate.systemProfilesPrice" placeholder="Enter Prise"
+                  style="width: 400px;" required />
+              </div>
+
+            </div>
+
+
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3 justify-between">
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Select the Category</label>
+                <select class="input-field p-2 border rounded-md" [(ngModel)]="categoryValueUpdate"
+                  name="categoryValueUpdate" style="width: 400px;" required>
+                  <option value="{{categoryValueUpdate}}" disabled   selected> Currnt :{{categoryValueUpdate}}</option>
+                  <option *ngFor="let x of category;" [value]="x.categoryId">{{x.categoryName}}</option>
+
+                </select>
+              </div>
+              <!-- <div>
+                <label class="block mb-2 text-gray-700 font-medium">Select the SubCategory</label>
+                <select class="input-field  p-2 border rounded-md" [(ngModel)]="SubaCategoryValueUpdate"
+                  style="width: 400px;" name="SubaCategoryValueUpdate" required>
+                  <option value="{{SubaCategoryValueUpdate}}"  disabled selected> Currnt :{{SubaCategoryValueUpdate}}</option>
+                  <option *ngFor="let x of SubCategory;" [value]="x.subCategoryId">{{x.subCategoryName}}
+                  </option>
+
+                </select>
+              </div> -->
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3" style="justify-content: space-between;">
+            
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Profile Name</label>
+                <input type="text" class="input-field" name="companyName" style="width: 400px;"
+                  [(ngModel)]="systemProfileUpdate.systemProfilesName" placeholder="Enter Company Name"
+                  required />
+              </div>
+            </div>
+
+
+
+          </div>
+
+          <!-- Contact Information -->
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Description</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+              <div>
+                <textarea class="input-field" style="width: 800px; height: 150px;"
+                  name="systemProfilesDiscription" [(ngModel)]="systemProfileUpdate.systemProfilesDiscription"
+                  placeholder="Enter Description" required></textarea>
+              </div>
+            </div>
+
+            <button  class="btn btn-warning" (click)="updateProfile()">Update</button>
+
+          </div>
+
+
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Select and Preview Video</h5>
+
+            <!-- Video Upload Input -->
+            <div>
+              <label class="block mb-2 text-gray-700 font-medium">Select a Video</label>
+              <input type="file" accept="video/*" (change)="onVideoSelected($event)"
+                class="input-field w-full border p-2 rounded-lg bg-white shadow-md">
+            </div>
+
+            <!-- Video Preview -->
+            <div class="mt-4" *ngIf="videoUrl">
+              <video [src]="videoUrl" class="rounded-lg shadow-lg" controls width="100"></video>
+            </div>
+            <button  class="btn btn-warning mt-2" (click)="videoUpload(this.systemProfileUpdate.systemProfilesId)">Update</button>
+
+          </div>
+
+          <div>
+            <button mat-button matStepperNext >Next</button>
+          </div>
+      
+
+
+
+
+
+        </form>
+
+
+
+
+
+
+
+
+
+      </mat-step>
+      <mat-step label="Step 2" state="chat">
+
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Systems Photos</h5>
+          <div class="flex items-center gap-8">
+            <div>
+              <input type="file" class="form-control" id="file" (change)="onFileSelected($event)"
+                accept="image/jpg, image/png" style="width: 400px;">
+              <div *ngIf="previewUrl">
+
+                <p-image [src]="previewUrl" alt="Image" width="200" [preview]="true" />
+                <button type="button" class="btn btn-danger mt-2" (click)="removeFile()">Remove</button>
+
+              </div>
+            </div>
+
+            <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+              <h2 class="text-lg font-semibold mb-4 text-gray-700">Image Gallery</h2>
+              <div class="bg-white p-3 rounded-lg h-80 overflow-auto border border-gray-300">
+                <div *ngFor="let img of image1; let i = index" class="flex items-center justify-between mb-3 p-2 border-b gap-2 border-gray-200">
+                  <span class="text-gray-600 font-medium">{{img.placeNumber}}.</span>
+            
+                  <!-- Use img tag for rendering Base64 image -->
+                  <img [src]="'data:image/jpeg;base64,' + img.base64Image" alt="System Image" width="150" class="rounded-lg shadow-md" />
+            
+                  <button 
+                    type="button" 
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-4 py-1 rounded"
+                    (click)="open(content)" >
+                    Update
+                  </button>
+                        <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+              <p-toast></p-toast>
+              <div>
+                <input type="file" class="form-control" id="file" (change)="onFileSelectedUpdated($event)"
+                  accept="image/jpg, image/png" style="width: 400px;">
+                <div *ngIf="previewUrlUpdate">
+    
+                  <p-image [src]="previewUrlUpdate" alt="Image" width="200" [preview]="true" />
+                  <button type="button" class="btn btn-danger mt-2" (click)="removeFileUpdate()">Remove</button>
+    
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn  btn-outline-warning" (click)="c('Save click');systemPictureUpdatre(img.imageId,img.systemProfilesId)">Update</button>
+            </div>
+          </ng-template>
+                </div>
+                
+              </div>
+              <button 
+                    type="button" (click)="deletePhto(image1[image1.length -1].imageId,image1[image1.length -1].systemProfilesId)"
+                    class="bg-red-500 mt-4 hover:bg-red-600 text-white font-medium px-4 py-1 rounded"
+                     >
+                    Delete
+                  </button>
+            </div>
+            
+            
+
+          </div>
+          <button class="btn btn-warning w-2" (click)="systemPictureUpload()">Update</button>
+
+
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg mt-4">
+          <div class="flex justify-between">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Systems Features</h5>
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Technologies</h5>
+
+          </div>
+          <div class="flex justify-between">
+            <div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+                <div>
+                  <textarea class="input-field" style="width: 400px; height: 150px;"
+                    name="systemFeatureDiscripion" [(ngModel)]="featuresUpdate.systemFeatureDiscripion"
+                    placeholder="Enter Description" required></textarea>
+                </div>
+              </div>
+              <div class="flex-2 mt-4 "
+                style=" height: 300px; width: 500px; overflow: auto;">
+
+                <ol  *ngFor="let x of systemFeatures;">
+                  <li class="flex">{{x.systemFeatureDiscripion}} 
+                    <button class="btn btn-danger ml-3 w-3 " (click)="DeleteFeature(x.systemFeatureId,x.systemProfileDto?.systemProfilesId)" >Remove
+                    </button>
+                  </li>
+                </ol>
+
+
+
+              </div>
+              <button class="btn btn-warning w-4 mt-2" (click)="saveFeatures()" >Update</button>
+
+            </div>
+
+
+            <div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+                <div>
+                  <textarea class="input-field" style="width: 400px; height: 150px;"
+                    name="chipName" [(ngModel)]="technolofiesUpdate.chipName"
+                    placeholder="Enter Description" required></textarea>
+                </div>
+              </div>
+              <div class="flex-2 mt-4 "
+                style=" height: 300px; width: 300px; overflow: auto;">
+                <ol  *ngFor="let x of technolofiesget;">
+                  <li class="flex">{{x.chipName}}
+
+
+                    <button class="btn btn-danger ml-3 h-10 w-5"(click)="DeleteChips(x.systemProfileChipId,x.systemProfileDto?.systemProfilesId)" >Remove
+                    </button>
+    
+                  </li>
+                </ol>
+
+
+
+              </div>
+              <button class="btn btn-warning w-5 mt-2" (click)="saveChips()">Update</button>
+
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      
+      </mat-step>
+    
+
+     
+      <!-- Icon overrides. -->
+     
+    </mat-horizontal-stepper>
+
+
+
+
+
+    <div class="flex justify-between mb-2">
+      <button type="button" class="btn btn-danger ml-4" (click)="modal.close('Close click');clearVideoAndImages();clearData();clearDta()">Close</button>
+      <div class="flex gap-4 mr-4">
+        <button (click)="turnApprove(systemProfileUpdate.systemProfilesId);modal.close('Close click');clearVideoAndImages();clearData();clearDta()" class="btn btn-success"> Approve Account</button>
+  
+        <button (click)="turnInctive(systemProfileUpdate.systemProfilesId);modal.close('Close click');clearVideoAndImages();clearData();clearDta()" class="btn btn-danger">Delete account</button>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+<ng-template #content3 let-modal>
+  <p-toast></p-toast>
+  <div class="modal-header">
+    <div class="flex gap-12 justify-between ">
+    <h4 class="modal-title">System ID :{{systemProfileUpdate.systemProfilesId}}</h4>
+    <h4 class="modal-title">System Status :
+      <span [ngSwitch]="systemProfileUpdate.requestStatus">
+        <p-tag *ngSwitchCase="'PENDING'" severity="warn" value="Pending" [rounded]="true" />
+        <p-tag *ngSwitchCase="'APPROVED'" severity="success" value="Approved" [rounded]="true" />
+        <p-tag *ngSwitchCase="'COMPLETED'" severity="info" value="Completed" [rounded]="true"  />
+        <p-tag *ngSwitchDefault severity="secondary" value="Unknown" [rounded]="true"  />
+      </span>
+    </h4>
+    </div>
+    <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+      (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body p-6">
+    <mat-horizontal-stepper>
+      <mat-step label="Step 1" state="phone">
+
+
+        <form class="space-y-6">
+          <!-- Personal Information -->
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Information</h5>
+           
+
+            <div class="grid mt-3 grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Prise </label>
+                <input type="text" name="systemProfilesPrice" class="input-field"
+                  [(ngModel)]="systemProfileUpdate.systemProfilesPrice" placeholder="Enter Prise"
+                  style="width: 400px;" required />
+              </div>
+
+            </div>
+
+
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3 justify-between">
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Select the Category</label>
+                <select class="input-field p-2 border rounded-md" [(ngModel)]="categoryValueUpdate"
+                  name="categoryValue" style="width: 400px;" required>
+                  <option value="{{categoryValueUpdate}}" disabled   selected> Currnt :{{categoryValueUpdate}}</option>
+                  <option *ngFor="let x of category;" [value]="x.categoryId">{{x.categoryName}}</option>
+
+                </select>
+              </div>
+              <!-- <div>
+                <label class="block mb-2 text-gray-700 font-medium">Select the SubCategory</label>
+                <select class="input-field  p-2 border rounded-md" [(ngModel)]="SubaCategoryValueUpdate"
+                  style="width: 400px;" name="SubaCategoryValueUpdate" required>
+                  <option value="{{SubaCategoryValueUpdate}}"  disabled selected> Currnt :{{SubaCategoryValueUpdate}}</option>
+                  <option *ngFor="let x of SubCategory;" [value]="x.subCategoryId">{{x.subCategoryName}}
+                  </option>
+
+                </select>
+              </div> -->
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3" style="justify-content: space-between;">
+            
+              <div>
+                <label class="block mb-2 text-gray-700 font-medium">Profile Name</label>
+                <input type="text" class="input-field" name="companyName" style="width: 400px;"
+                  [(ngModel)]="systemProfileUpdate.systemProfilesName" placeholder="Enter Company Name"
+                  required />
+              </div>
+            </div>
+
+
+
+          </div>
+
+          <!-- Contact Information -->
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Profile Description</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+              <div>
+                <textarea class="input-field" style="width: 800px; height: 150px;"
+                  name="systemProfilesDiscription" [(ngModel)]="systemProfileUpdate.systemProfilesDiscription"
+                  placeholder="Enter Description" required></textarea>
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="bg-gray-100 p-4 rounded-lg">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Select and Preview Video</h5>
+
+            <!-- Video Upload Input -->
+          
+
+            <!-- Video Preview -->
+            <div class="mt-4" *ngIf="videoUrl">
+              <video [src]="videoUrl" class="rounded-lg shadow-lg" controls width="100"></video>
+            </div>
+
+          </div>
+
+          <div>
+            <button mat-button matStepperNext >Next</button>
+          </div>
+      
+
+
+
+
+
+        </form>
+
+
+
+
+
+
+
+
+
+      </mat-step>
+      <mat-step label="Step 2" state="chat">
+
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <h5 class="text-lg font-medium text-gray-700 mb-3">Systems Photos</h5>
+          <div class="flex items-center gap-8">
+        
+
+
+            <div class="flex-2 w-4 " style="background-color: aqua; height: 300px; overflow: auto;">
+              <div *ngFor="let img of images">
+                <p-image [src]="img" alt="System Image" width="200" [preview]="true" />
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg mt-4">
+          <div class="flex justify-between">
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Systems Features</h5>
+            <h5 class="text-lg font-medium text-gray-700 mb-3">Technologies</h5>
+
+          </div>
+          <div class="flex justify-between">
+            <div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+             
+              </div>
+              <div class="flex-2 mt-4"
+                style=" height: 300px; width: 500px; overflow: auto;">
+
+                <ol  *ngFor="let x of systemFeatures;">
+                  <li >{{x.systemFeatureDiscripion}} 
+                  
+                  </li>
+                </ol>
+
+
+
+              </div>
+
+            </div>
+
+
+            <div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+             
+              </div>
+              <div class="flex-2 mt-4 "
+                style=" height: 300px; width: 300px; overflow: auto;">
+                <ol  *ngFor="let x of technolofiesget;">
+                  <li>{{x.chipName}}
+
+
+                
+    
+                  </li>
+                </ol>
+
+
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+        </div>
+
+
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      
+      </mat-step>
+    
+
+    
+      <!-- Icon overrides. -->
+     
+    </mat-horizontal-stepper>
+
+
+
+
+
+
+  </div>
+  <div class="flex justify-between mb-2">
+    <button type="button" class="btn btn-danger ml-4" (click)="modal.close('Close click');clearVideoAndImages();clearData();clearDta()">Close</button>
+    <div class="flex gap-4 mr-4">
+      <button (click)="turnActive(systemProfileUpdate.systemProfilesId);modal.close('Close click');clearVideoAndImages();clearData();clearDta()" class="btn btn-success"> Recover Account</button>
+
+      <button (click)="confirmDelete(systemProfileUpdate.systemProfilesId);modal.close('Close click');clearVideoAndImages();clearData();clearDta()" class="btn btn-danger">Delete account</button>
+    </div>
+  </div>
+</ng-template>

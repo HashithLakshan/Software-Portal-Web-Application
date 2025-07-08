@@ -1,0 +1,234 @@
+<!-- 
+<div class="flex" >
+  <div class="sidebar" [class.active]="isSidebarActive" style="background-color: #344CB7;">
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/" class="flex gap-3 font-medium">
+          <img src="assets/dashboard.png" alt="Home" width="30" height="20"> Dashboard
+        </a>
+        
+      </li>
+    
+      <li>
+        <a routerLink="/s-employeeDetails" class="flex gap-3 font-medium" style="cursor: pointer;">
+          <img src="assets/manager.png" alt="Home" width="30" height="20"> Employee Maneging
+        </a>
+      </li>
+      <li>
+        <a routerLink="/s-employeeProfiles" class="flex gap-3 font-medium" style="cursor: pointer;">
+          <img src="assets/user-info-writing.png" alt="Home" width="30" height="20"> Profiles Maneging
+        </a>
+      </li>
+      
+    
+
+
+      <li>
+        <a routerLink="/s-customer" class="flex gap-3 font-medium" style="cursor: pointer;">
+          <img src="assets/communication.png" alt="Home" width="30" height="20"> Meetings Maneging
+        </a>
+      </li>
+     
+      <li>
+        <a routerLink="/s-payment-resit" class="flex gap-3 font-medium" style="cursor: pointer;">
+          <img src="assets/mobile-banking.png" alt="Home" width="30" height="20"> Payment Maneging
+        </a>
+      </li>
+      <li>
+        <a routerLink="/s-system-issues" class="flex gap-3 font-medium" style="cursor: pointer;">
+          <img src="assets/comments.png" alt="Home" width="30" height="20"> Customers Issues
+        </a>
+      </li>
+      <li>
+        <a routerLink="/s-page-maneging" class="flex gap-3 font-medium" style="cursor: pointer;">
+          <img src="assets/landing-page.png" alt="Home" width="30" height="20"> Site Customizing
+        </a>
+      </li>
+
+    
+
+  
+    </ul>
+  </div>
+  <button class="toggle-btn" (click)="toggleSidebar()">☰</button>
+
+ 
+
+</div> -->
+
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside 
+    class="bg-indigo-700 text-white transition-all duration-300 ease-in-out fixed md:relative h-screen z-20"
+    [class]="isSidebarActive ? 'w-64' : 'w-0 md:w-20 overflow-hidden md:overflow-visible'"
+  >
+    <div class="h-full flex flex-col">
+      <!-- Logo/Sidebar Toggle -->
+      <div class="p-4 flex items-center justify-between border-b border-indigo-600">
+        <!-- Logo and Title -->
+        <div class="flex items-center gap-3">
+          <img src="/assets/logo.png"  *ngIf="isSidebarActive" Class="rounded" style="width: 150px;" alt="Logo" >
+
+         
+          <img 
+            *ngIf="!isSidebarActive" 
+            src="assets/logo.png"  
+            alt="Company Icon" 
+            class="h-8 w-auto"
+          >
+        </div>
+      
+        <!-- Toggle Button -->
+        <button 
+          (click)="toggleSidebar()" 
+          class="p-2 rounded-lg hover:bg-indigo-600 transition-colors"
+        >
+          ☰
+        </button>
+      </div>
+      
+      <!-- Navigation Links -->
+      <nav class="flex-1 overflow-y-auto py-4">
+        <ul class="space-y-2 px-1">
+          <li >
+            <a 
+              routerLink="/admin/super-admin-dash" 
+              class="flex items-center p-3 rounded hover:bg-indigo-600 transition-colors group"
+              [class]="isSidebarActive ? 'justify-start gap-3' : 'justify-center'"
+              routerLinkActive="bg-indigo-800"
+              style="text-decoration: none;"
+
+            >
+              <img src="assets/dashboard.png" alt="Dashboard" width="30" height="20">
+              <span *ngIf="isSidebarActive"  class="whitespace-nowrap" style="color: white;">Dashboard</span>
+              <span *ngIf="!isSidebarActive" class="absolute left-16 ml-2  text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap" >Dashboard</span>
+            </a>
+          </li>
+          
+          <li>
+            <a 
+              routerLink="/admin/s-employeeDetails" 
+              class="flex items-center p-3 rounded-lg hover:bg-indigo-600 transition-colors group"
+              [class]="isSidebarActive ? 'justify-start gap-3' : 'justify-center'"
+              routerLinkActive="bg-indigo-800"
+              style="text-decoration: none;"
+            >
+              <img src="assets/manager.png" alt="Employee Managing" width="30" height="20">
+              <span *ngIf="isSidebarActive" class="whitespace-nowrap" style="color: white;" >Employee Managing</span>
+              <span *ngIf="!isSidebarActive" class="absolute left-16 ml-2 bg-indigo-700 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Employee Managing</span>
+            </a>
+          </li>
+          
+          <li>
+            <a 
+              routerLink="/admin/s-employeeProfiles" 
+              class="flex items-center p-3 rounded-lg hover:bg-indigo-600 transition-colors group"
+              [class]="isSidebarActive ? 'justify-start gap-3' : 'justify-center'"
+              routerLinkActive="bg-indigo-800"
+              style="text-decoration: none;"
+
+            >
+              <img src="assets/user-info-writing.png" alt="Profiles Managing" width="30" height="20">
+              <span *ngIf="isSidebarActive" class="whitespace-nowrap" style="color: white;">Profiles Managing</span>
+              <span *ngIf="!isSidebarActive" class="absolute left-16 ml-2 bg-indigo-700 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Profiles Managing</span>
+            </a>
+          </li>
+          
+          <li>
+            <a 
+              routerLink="/admin/s-customer" 
+              class="flex items-center p-3 rounded-lg hover:bg-indigo-600 transition-colors group"
+              [class]="isSidebarActive ? 'justify-start gap-3' : 'justify-center'"
+              routerLinkActive="bg-indigo-800"
+              style="text-decoration: none;"
+
+            >
+              <img src="assets/communication.png" alt="Meetings Managing" width="30" height="20">
+              <span *ngIf="isSidebarActive" class="whitespace-nowrap" style="color: white;">Meetings Managing</span>
+              <span *ngIf="!isSidebarActive" class="absolute left-16 ml-2 bg-indigo-700 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Meetings Managing</span>
+            </a>
+          </li>
+          
+          <li>
+            <a 
+              routerLink="/admin/s-payment-resit" 
+              class="flex items-center p-3 rounded-lg hover:bg-indigo-600 transition-colors group"
+              [class]="isSidebarActive ? 'justify-start gap-3' : 'justify-center'"
+              routerLinkActive="bg-indigo-800"
+              style="text-decoration: none;"
+
+            >
+              <img src="assets/mobile-banking.png" alt="Payment Managing" width="30" height="20">
+              <span *ngIf="isSidebarActive" class="whitespace-nowrap"style="color: white;" >Payment Managing</span>
+              <span *ngIf="!isSidebarActive" class="absolute left-16 ml-2 bg-indigo-700 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Payment Managing</span>
+            </a>
+          </li>
+          
+          <li>
+            <a 
+              routerLink="/admin/s-system-issues" 
+              class="flex items-center p-3 rounded-lg hover:bg-indigo-600 transition-colors group"
+              [class]="isSidebarActive ? 'justify-start gap-3' : 'justify-center'"
+              routerLinkActive="bg-indigo-800"
+              style="text-decoration: none;"
+
+            >
+              <img src="assets/comments.png" alt="Customer Issues" width="30" height="20">
+              <span *ngIf="isSidebarActive" class="whitespace-nowrap" style="color: white;">Customer Issues</span>
+              <span *ngIf="!isSidebarActive" class="absolute left-16 ml-2 bg-indigo-700 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Customer Issues</span>
+            </a>
+          </li>
+          
+          <li>
+            <a 
+              routerLink="/admin/s-page-maneging" 
+              class="flex items-center p-3 rounded-lg hover:bg-indigo-600 transition-colors group"
+              [class]="isSidebarActive ? 'justify-start gap-3' : 'justify-center'"
+              routerLinkActive="bg-indigo-800"
+              style="text-decoration: none;"
+
+            >
+              <img src="assets/landing-page.png" alt="Site Customizing" width="30" height="20">
+              <span *ngIf="isSidebarActive" class="whitespace-nowrap" style="color: white;">Site Customizing</span>
+              <span *ngIf="!isSidebarActive" class="absolute left-16 ml-2 bg-indigo-700 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Site Customizing</span>
+            </a>
+          </li>
+          
+        </ul>
+      </nav>
+      
+      <!-- Sidebar Footer -->
+      <a 
+      (click)="onLogout()"
+      class="flex items-center p-3 rounded-lg hover:bg-indigo-600 transition-colors group mb-2"
+      [class]="isSidebarActive ? 'justify-start gap-3' : 'justify-center'"
+      routerLinkActive="bg-indigo-800"
+      style="text-decoration: none; cursor: pointer;"
+
+    >
+      <img src="assets/logout.png" alt="Site Customizing" width="30" height="20">
+      <span *ngIf="isSidebarActive" class="whitespace-nowrap">Log Out</span>
+      <span *ngIf="!isSidebarActive" class="absolute left-16 ml-2 bg-indigo-700 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Site Customizing</span>
+    </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main 
+    class="flex-1 transition-all duration-300 ease-in-out"
+    [class]="isSidebarActive ? 'ml-0 md:ml-64' : 'ml-0 md:ml-20'"
+  >
+    <!-- Mobile Toggle Button -->
+    <button 
+      (click)="toggleSidebar()" 
+      class="md:hidden fixed top-4 left-4 z-10 p-2 bg-indigo-700 text-white rounded-lg shadow-lg"
+    >
+      ☰
+    </button>
+    
+    <!-- Your page content goes here -->
+    <div class="p-6">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

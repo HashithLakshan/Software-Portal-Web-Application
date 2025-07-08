@@ -1,0 +1,290 @@
+<!-- <div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <form class="p-4 border rounded bg-light">
+        <h3 class="text-center mb-4">Employee Registration</h3>
+
+        <div class="form-group mb-3">
+          <label for="userName">Name</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="userName" 
+            name="userName" 
+            [(ngModel)]="user.userName" 
+            placeholder="Enter your name" 
+            required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            name="email1" 
+            [(ngModel)]="email1" 
+            placeholder="Enter your email" 
+            required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            class="form-control" 
+            id="password" 
+            name="password" 
+            [(ngModel)]="user.password" 
+            placeholder="Create a password" 
+            required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="confirmPassword">Confirm Password</label>
+          <input 
+            type="password" 
+            class="form-control" 
+            id="confirmPassword" 
+            name="confirmPassword" 
+            [(ngModel)]="confirmPassword" 
+            placeholder="Confirm your password" 
+            required>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="companyName">Company Name</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="companyName" 
+            name="companyName" 
+            [(ngModel)]="employee.companyName" 
+            placeholder="Enter your company name">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="employeeNumber">Employee Number</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="employeeNumber" 
+            name="employeeNumber" 
+            [(ngModel)]="employee.employeeNumber" 
+            placeholder="Enter your employee number">
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="employeeNIC">NIC</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="employeeNIC" 
+            name="employeeNIC" 
+            [(ngModel)]="employee.employeeNIC" 
+            placeholder="Enter your NIC number">
+        </div>
+
+        <label class="mb-2">Gender</label>
+        <div class="form-group d-flex gap-6 mb-3">
+          <div>
+            <input 
+              class="form-check-input" 
+              type="radio" 
+              name="gender" 
+              [(ngModel)]="employee.gender" 
+              value="Male" 
+              id="male">
+            <label for="male">Male</label>
+          </div>
+          <div>
+            <input 
+              class="form-check-input" 
+              type="radio" 
+              name="gender" 
+              [(ngModel)]="employee.gender" 
+              value="Female" 
+              id="female">
+            <label for="female">Female</label>
+          </div>
+          <div>
+            <input 
+              class="form-check-input" 
+              type="radio" 
+              name="gender" 
+              [(ngModel)]="employee.gender" 
+              value="Other" 
+              id="other">
+            <label for="other">Other</label>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="file">Upload Profile Picture</label>
+          <input 
+            type="file" 
+            class="form-control" 
+            id="file" 
+            (change)="onFileSelected($event)" 
+            accept="image/jpg, image/png">
+        </div>
+    
+        <button 
+          type="submit" 
+          class="btn btn-primary w-100" 
+          (click)="onSubmit()">Submit</button>
+      </form>
+    </div>
+  </div>
+</div> -->
+<div class="grid-container">
+  <div class="image-section" >
+    
+    <img src="/assets/employeeSignUp.png" alt="" >
+
+  </div>
+  <!-- Left Side: Form -->
+  <div class="form-section">
+
+    <mat-stepper>
+      <mat-step label="Step 1" state="1">
+        <form class="space-y-3 mt-8">
+          <!-- Name and Email Fields -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+            <div>
+              <label for="name" class="block mb-2 font-medium text-gray-700">Initial Name</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="userName" 
+                [(ngModel)]="user.userName"
+                class="input-field" 
+                placeholder="Enter your name" 
+                required style="width: 300px;" />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 font-medium text-gray-700">Company Name</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="companyName" 
+                class="input-field"
+                [(ngModel)]="employee.companyName" 
+                placeholder="Enter your Company Name" 
+                required  style="width: 300px;" />
+            </div>
+          </div>
+        </form>
+        <form class="space-y-3 mt-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+            <div>
+              <label for="name" class="block mb-2 font-medium text-gray-700">NIC No</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="employeeNIC" 
+                class="input-field" 
+                placeholder="Enter your NIC Number" 
+                [(ngModel)]="employee.employeeNIC"
+                required style="width: 300px;" />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 font-medium text-gray-700">Company Reg No</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="companyRgNo" 
+                class="input-field" 
+                placeholder="Enter your Company Register Number" 
+                [(ngModel)]="employee.companyRgNo" 
+                required  style="width: 300px;" />
+            </div>
+          </div>
+    
+
+        </form>
+        <div>
+          <button  mat-button matStepperNext style="width: 100px; color: aliceblue;" class="btn btn-primary mt-8">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Step 2" state="2">
+        <form class="space-y-3 mt-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+            <div>
+              <label for="name" class="block mb-2 font-medium text-gray-700">Email</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="email1" 
+                class="input-field" 
+                [(ngModel)]="email1"
+                placeholder="Enter your Company Email" 
+                required style="width: 300px;" />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 font-medium text-gray-700">Contact No</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="employeeNumber" 
+                class="input-field" 
+                [(ngModel)]="employee.employeeNumber"
+                placeholder="Enter your Company Contact Number" 
+                required  style="width: 300px;" />
+            </div>
+          </div>
+        </form>
+        <form class="space-y-3 mt-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="justify-content: space-between;">
+            <div>
+              <label for="name" class="block mb-2 font-medium text-gray-700">Pofile Photo</label>
+             
+              <div>
+                <label for="file">Upload Profile Picture</label>
+                <input 
+                  type="file" 
+                  class="form-control" 
+                  id="file" 
+                  (change)="onFileSelected($event)" 
+                  accept="image/jpg, image/png"
+                  style="width: 300px;" >
+              
+                <!-- Image preview -->
+                <div *ngIf="previewUrl" class="mt-4">
+                  <img [src]="previewUrl" alt="Selected File" style="max-width: 200px; border: 1px solid #ddd; padding: 5px;">
+                  <button 
+                  type="button" 
+                  class="btn btn-danger mt-2" 
+                  (click)="removeFile()">Remove</button>
+                </div>
+                
+              </div>
+              
+
+
+              
+            </div>
+         
+          </div>
+    
+
+        </form>
+
+
+        <div style="justify-content: space-between;display: flex;">
+          <button mat-button matStepperPrevious style="width: 100px; background-color: red; color: white;" class="mt-8">Back</button>
+          <div style="justify-content: space-between;display: flex;">
+            <button (click)="onSubmit()"  class="btn btn-success mt-8">Submit</button>
+          </div>        </div>
+      </mat-step>
+    
+    
+      <!-- Icon overrides. -->
+    </mat-stepper>
+   
+
+  </div>
+
+  <!-- Right Side: Photo/Content -->
+ 
+</div>

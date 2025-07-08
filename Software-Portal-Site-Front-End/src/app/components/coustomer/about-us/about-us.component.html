@@ -1,0 +1,139 @@
+
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-indigo-50 to-white py-16 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col lg:flex-row items-center gap-12">
+      <!-- Image Section -->
+      <div class="lg:w-1/2">
+        <div class="rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition duration-500">
+          <img src="/assets/contact-us.png" alt="About Us" class="w-full h-auto object-cover">
+        </div>
+      </div>
+      
+      <!-- Content Section -->
+      <div class="lg:w-1/2 mt-10 lg:mt-0">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+          About <span class="text-indigo-600">Us</span>
+        </h1>
+        <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+          We are a passionate team dedicated to creating innovative solutions that make a difference. 
+          Our mission is to deliver exceptional value through cutting-edge technology and 
+          customer-centric approaches.
+        </p>
+        
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-full">
+              <svg class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-lg font-medium text-gray-900">Fast Solutions</h3>
+              <p class="mt-1 text-gray-600">Quick turnaround without compromising quality</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-full">
+              <svg class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-lg font-medium text-gray-900">Cloud Technology</h3>
+              <p class="mt-1 text-gray-600">Modern cloud-based solutions for scalability</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl sm:text-5xl font-bold text-center text-gray-900 mb-12">
+      Frequently Asked Questions
+    </h2>
+    
+    <mat-accordion class="space-y-4">
+      <!-- FAQ Item 1 -->
+      <mat-expansion-panel class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <mat-expansion-panel-header class="hover:bg-gray-50 px-4">
+          <mat-panel-title class="font-medium text-gray-900">
+            What services do you offer?
+          </mat-panel-title>
+          <mat-panel-description class="text-gray-500">
+            {{panelOpenState ? 'Detailed answer' : 'Click to expand'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="p-4 text-gray-600">
+          We offer a comprehensive range of services including web development, mobile app development, 
+          cloud solutions, UI/UX design, and digital marketing strategies tailored to your business needs.
+        </div>
+      </mat-expansion-panel>
+      
+      <!-- FAQ Item 2 -->
+      <mat-expansion-panel class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <mat-expansion-panel-header class="hover:bg-gray-50 px-4">
+          <mat-panel-title class="font-medium text-gray-900">
+            How long does a typical project take?
+          </mat-panel-title>
+          <mat-panel-description class="text-gray-500">
+            {{panelOpenState ? 'Detailed answer' : 'Click to expand'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="p-4 text-gray-600">
+          Project timelines vary based on complexity. A simple website might take 2-4 weeks, while 
+          complex applications can take 3-6 months. We provide detailed timelines after our initial 
+          consultation and requirements analysis.
+        </div>
+      </mat-expansion-panel>
+      
+      <!-- FAQ Item 3 -->
+      <mat-expansion-panel class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <mat-expansion-panel-header class="hover:bg-gray-50 px-4">
+          <mat-panel-title class="font-medium text-gray-900">
+            What technologies do you work with?
+          </mat-panel-title>
+          <mat-panel-description class="text-gray-500">
+            {{panelOpenState ? 'Detailed answer' : 'Click to expand'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="p-4 text-gray-600">
+          Our tech stack includes Angular, React, Node.js, Python, Java, .NET for development, 
+          AWS/Azure/GCP for cloud solutions, and modern databases like MongoDB, PostgreSQL, 
+          and Firebase.
+        </div>
+      </mat-expansion-panel>
+      
+      <!-- FAQ Item 4 -->
+      <mat-expansion-panel class="rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <mat-expansion-panel-header class="hover:bg-gray-50 px-4">
+          <mat-panel-title class="font-medium text-gray-900">
+            How do you ensure quality?
+          </mat-panel-title>
+          <mat-panel-description class="text-gray-500">
+            {{panelOpenState ? 'Detailed answer' : 'Click to expand'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="p-4 text-gray-600">
+          We follow industry best practices including code reviews, automated testing, continuous 
+          integration, and rigorous QA processes. Our agile methodology ensures regular feedback 
+          and iterations.
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+    <!-- CTA Section -->
+    <div class="mt-16 text-center">
+      <h3 class="text-2xl font-medium text-gray-900 mb-4">Still have questions?</h3>
+      <p class="text-gray-600 mb-6">We're happy to answer any questions you might have.</p>
+      <button class="px-8 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg">
+        Contact Our Team
+      </button>
+    </div>
+  </div>
+</div>

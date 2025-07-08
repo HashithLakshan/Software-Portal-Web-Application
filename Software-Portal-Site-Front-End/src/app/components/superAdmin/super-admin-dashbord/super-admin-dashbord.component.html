@@ -1,0 +1,633 @@
+
+<div class="flex">
+
+
+
+
+    <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0 flex gap-3">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight">Welcome</h1>
+                            <h1 class="h2 mb-0 ls-tight">Dashbord</h1>
+
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!-- <div class="mx-n1">
+                                <a href="#" class="btn d-inline-flex btn-sm btn-neutral border-base mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-pencil"></i>
+                                    </span>
+                                    <span>Edit</span>
+                                </a>
+                                <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-plus"></i>
+                                    </span>
+                                    <span>Create</span>
+                                </a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        <!-- Main -->
+        <main class="py-6 bg-surface-secondary">
+            <p-toast></p-toast>
+            <div class="container-fluid">
+                <!-- Card stats -->
+                <div class="row g-6 mb-6">
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Today
+                                            Meetings</span>
+                                        <span class="h3 font-bold mb-0">{{countOfZoomToday}}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-green-500 text-white text-lg rounded-circle">
+                                            <img src="assets/online-conference.png" alt="Meeting Icon" width="40"
+                                                height="40">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Pending
+                                            Meetings</span>
+                                        <span class="h3 font-bold mb-0">{{countOfPendingMeetings}}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-blue-500 text-white text-lg rounded-circle">
+                                            <img src="assets/video-call.png" alt="Meeting Icon" width="40" height="40">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Cheack
+                                            Payments</span>
+                                        <span class="h3 font-bold mb-0">{{countOfPaymentResit}}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-yellow-500 text-white text-lg rounded-circle">
+                                            <img src="assets/card.png" alt="Meeting Icon" width="40" height="40">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Systems</span>
+                                        <span class="h3 font-bold mb-0">{{countOfSystems}}</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-red-500  text-white text-lg rounded-circle">
+                                            <img src="assets/software.png" alt="Meeting Icon" width="40" height="40">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7 p-5">
+                    <div class="card-header">
+                        <h5 class="mb-0">Applications</h5>
+                    </div>
+                    <div class="table-responsive">
+
+
+
+                        <mat-tab-group class="mt-4">
+                            <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+                                [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" />
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <h4>Today Meetings</h4>
+                                </ng-template>
+
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Perchase ID</th>
+                                            <th scope="col">System ID</th>
+                                            <th scope="col">Time</th>
+                                            <th scope="col">Topic</th>
+                                            <th scope="col">Duration</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let x of zoomToday; index as i">
+                                            <td>
+                                                {{x.perchaseId}}
+                                            </td>
+                                            <td>
+                                                {{x.systemProfileDto?.systemProfilesId}}
+                                            </td>
+                                            <td>
+
+                                                {{x.startTime}}
+
+                                            </td>
+                                            <td>
+                                                {{x.sheduleTopic}}
+                                            </td>
+                                            <td>
+
+                                                {{x.meeting_Duration}}
+
+                                            </td>
+                                            <td class="text-end">
+                                                <a  (click)="openLg(content1);onViewBtn(x,i)" class="btn btn-sm btn-neutral">View</a>
+                                                <button type="button" (click)="messagePopUp('today',x.perchaseId,x.zoomLink)"
+                                                    class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <div class="card-footer border-0 pt-4 pb-2 ">
+                                    <ngb-pagination [collectionSize]="collectionSize3" [(page)]="page3"
+                                        [pageSize]="pageSize3" (pageChange)="onPageChange3($event);">
+                                    </ngb-pagination>
+                                </div>
+
+                            </mat-tab>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <h4>Pending Meetings</h4>
+                                </ng-template>
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Perchase ID</th>
+                                            <th scope="col">System ID</th>
+                                            <th scope="col">Slot Time</th>
+                                            <th scope="col">Topic</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let x of zoomPending; index as i">
+                                            <td>
+                                                {{x.perchaseId}}
+                                            </td>
+                                            <td>
+                                                {{x.systemProfileDto?.systemProfilesId}}
+                                            </td>
+                                            <td>
+
+                                                {{x.zoomTimeSlotsDto?.slotOpenTime}} - {{x.zoomTimeSlotsDto?.slotCloseTime}}
+
+                                            </td>
+                                            <td>
+                                                {{x.sheduleTopic}}
+                                            </td>
+                                            
+                                            <td class="text-end">
+                                                <a  (click)="openLg(content1);onViewBtn2(x,i)" class="btn btn-sm btn-neutral">View</a>
+                                                <button type="button" (click)="messagePopUp('today',x.perchaseId,x.zoomLink)"
+                                                    class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <div class="card-footer border-0 pt-4 pb-2 ">
+                                    <ngb-pagination [collectionSize]="collectionSize1" [(page)]="page1"
+                                        [pageSize]="pageSize1" (pageChange)="onPageChange1($event);">
+                                    </ngb-pagination>
+                                </div>
+
+                            </mat-tab>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <h4>Cheack Payments</h4>
+                                </ng-template>
+
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">System ID</th>
+                                            <th scope="col">Perchase ID</th>
+                                            <th scope="col">Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let x of payementResitApprove; index as i">
+
+                                            <td>
+                                                {{x.id}}
+                                            </td>
+                                            <td>
+
+                                                {{x.systemProfileDto?.systemProfilesId}}
+
+                                            </td>
+                                            <td>
+                                                {{x.zoomDto?.perchaseId}}
+                                            </td>
+                                            <td>
+
+                                                {{x.saveDate}}
+
+                                            </td>
+                                            <td class="text-end">
+                                                <a  (click)="openLg(content2);onViewBtn3(x,i)" class="btn btn-sm btn-neutral">View</a>
+                                                <button type="button" (click)="confirmComplete(x.id,'Inactive')"
+                                                    class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <div class="card-footer border-0 pt-4 pb-2 ">
+                                    <ngb-pagination [collectionSize]="collectionSize2" [(page)]="page2"
+                                        [pageSize]="pageSize2" (pageChange)="onPageChange($event);">
+                                    </ngb-pagination>
+                                </div>>
+
+                            </mat-tab>
+                            <!-- <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <h4>Systems</h4>
+                                </ng-template>
+
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Employee ID</th>
+                                            <th scope="col">Profile Name</th>
+                                            <th scope="col">Ctegory Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let x of systemProfileApprove; index as i">
+
+                                            <td>
+                                                {{x.systemProfilesId}}
+                                            </td>
+                                            <td>
+
+                                                {{x.employeeDto?.employeeId}}
+
+                                            </td>
+                                            <td>
+                                                {{x.systemProfilesName}}
+                                            </td>
+                                            <td>
+
+                                                {{x.categoryDto?.categoryName}}
+
+                                            </td>
+                                            <td class="text-end">
+                                                <a href="#" class="btn btn-sm btn-neutral">View</a>
+                                                <button type="button"
+                                                    class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="card-footer border-0 pt-4 pb-2 ">
+                                    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page"
+                                        [pageSize]="pageSize" (pageChange)="onPageChange2($event);">
+                                    </ngb-pagination>
+                                </div>
+
+                            </mat-tab> -->
+                        </mat-tab-group>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+</div>
+
+<!-- Models -->
+
+
+<ng-template #content1 let-modal>
+    <p-toast></p-toast>
+    <div class="modal-header">
+      <h4 class="modal-title">Perchase ID :{{zoomDataShow.perchaseId}}</h4>
+      <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+  
+      <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+            <label for="name" class="block mb-2 font-medium text-gray-700">Company Name</label>
+            <input type="text" id="name" name="customerName" style="width: 300px;" class=" input-field"
+             value="{{zoomDataShow.customerName}}" placeholder="Enter your name" disabled />
+          </div>
+  
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Company Register No</label>
+            <input type="text" id="contact" style="width: 300px;" name="companyRegNo"
+            value="{{zoomDataShow.companyRegNo}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+          
+  
+  
+  
+            <div>
+              <label for="address" class="block mb-2 font-medium text-gray-700">Address</label>
+              <textarea id="address" style="width: 300px;" name="customerAddress" class=" input-field"
+                rows="4" value="{{zoomDataShow.customerAddress}}" placeholder="Enter your address" disabled></textarea>
+            </div>
+        </div>
+          
+  
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">Contact Number</label>
+              <input type="text" id="contact" style="width: 300px;" name="customerNumber"
+              value="{{zoomDataShow.customerNumber}}"class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 font-medium text-gray-700">Email</label>
+              <input type="email" id="email" style="width: 300px;" name="customerEmail"
+                class=" input-field" value="{{zoomDataShow.customerEmail}}" placeholder="Enter your email"
+                disabled />
+            </div>
+          </div>
+        
+  
+          <h2 class="text-lg font-semibold mt-4">System Details</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{zoomDataShow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{zoomDataShow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="${{zoomDataShow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">Employee ID</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{zoomDataShow.systemProfileDto?.employeeDto?.employeeId}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+  
+          <div>
+            <label for="duration" class="block mb-2 font-medium text-gray-700">Type</label>
+            <input type="text" id="duration" name="duration" value="{{zoomDataShow.customerType}}" style="width: 300px;"
+              class=" input-field" placeholder="Enter duration in minutes" disabled  />
+          </div>
+          </div>
+    <!-- Schedule Meeting -->
+    <h2 class="text-lg font-semibold mt-4">Schedule Meeting</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+      <div>
+        <label for="topic" class="block mb-2 font-medium text-gray-700">Topic</label>
+        <input type="text" id="topic" name="topic" style="width: 300px;" value="{{zoomDataShow.sheduleTopic}}"
+          class=" input-field" placeholder="Enter topic" disabled />
+      </div>
+      <!-- <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Time Duration (minutes)</label>
+        <input type="number" id="duration" name="duration" value="{{zoomDataShow.meeting_Duration}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" required min="1" max="1440" disabled />
+      </div> -->
+    </div>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Date</label>
+        <input type="text" id="duration" name="duration" value="{{zoomDataShow.startDate}} " style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Time Slot</label>
+          <input type="text" id="duration" name="duration" value="{{zoomDataShow.zoomTimeSlotsDto?.slotOpenTime}} To {{zoomDataShow.zoomTimeSlotsDto?.slotCloseTime}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+    </div>
+    <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting Password</label>
+        <input type="text" id="duration" name="duration" value="{{zoomDataShow.meetingPassword}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled />
+      </div>
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting ID</label>
+          <input type="text" id="duration" name="duration" value="{{zoomDataShow.zmeetingId}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+    </div> -->
+    <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+      <div>
+        <label for="address" class="block mb-2 font-medium text-gray-700">Meeting Link</label>
+        <textarea id="address" style="width: 400px;" name="customerAddress" class=" input-field"
+          rows="2" value="{{zoomDataShow.zoomLink}}" placeholder="Enter your address" disabled></textarea>
+      </div>
+       
+    </div> -->
+    <div class="flex gap-4">
+        <!-- Show Join Meeting button only if requestStatus is 'approved' -->
+        <button *ngIf="zoomDataShow.requestStatus === 'APPROVED'" 
+            type="button" class="btn btn-success" 
+            (click)="messagePopUp('join', zoomDataShow.perchaseId, zoomDataShow.zoomLink)">
+            Join Meeting
+        </button>
+    
+        <!-- Reject Meeting button (Always Visible) -->
+        <button type="button" class="btn btn-warning" 
+            (click)="messagePopUp('today', zoomDataShow.perchaseId, zoomDataShow.zoomLink)">
+            Reject Meeting
+        </button>
+    </div>
+    
+    <!-- Submit Button -->
+    </form>
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  <div class="modal-footer ">
+  <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+  </ng-template>
+
+
+
+
+  <ng-template #content2 let-modal>
+    <p-toast></p-toast>
+    <div class="modal-header">
+      <h4 class="modal-title">Payment Resith ID :{{payementResitshow.id}}</h4>
+      <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+  
+      <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+          <label for="contact" class="block mb-2 font-medium text-gray-700">Download Resit</label>
+          <button class="btn btn-light" (click)="downloadFile(payementResitshow.id)" >
+            <img src="assets/inbox.png" width="52" height="50" alt="Search" />
+          </button>
+          </div>
+          
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Submit Date</label>
+            <input type="text" id="contact" style="width: 300px;" name=""
+            value="{{payementResitshow.saveDate}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+  
+  
+          
+        </div>
+          
+  
+        
+        
+  
+          <h2 class="text-lg font-semibold mt-4">System Details</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+              <input type="text" id="contact" style="width: 300px;" name=""
+              value="{{payementResitshow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{payementResitshow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{payementResitshow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+        
+          </div>
+         
+    <!-- Schedule Meeting -->
+    <h2 class="text-lg font-semibold mt-4"> Meeting Details</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+      <div>
+        <label for="topic" class="block mb-2 font-medium text-gray-700">Perchase ID</label>
+        <input type="text" id="topic" name="topic" style="width: 300px;" value="{{payementResitshow.zoomDto?.perchaseId}}"
+          class=" input-field" placeholder="Enter topic" disabled />
+      </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Date</label>
+        <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startDate}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+    </div>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting ID</label>
+        <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.zmeetingId}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Time</label>
+          <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startTime}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+    </div>
+  
+   
+    <div class="flex gap-4">
+      <button type="button" class="btn btn-success" (click)="confirmComplete(payementResitshow.id,'Completed')">Confirm Complete Business</button>
+    <button type="button" class="btn btn-warning"  (click)="confirmComplete(payementResitshow.id,'Inactive')">Delete</button>
+    </div>
+    <!-- Submit Button -->
+    </form>
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  <div class="modal-footer ">
+  <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+  </ng-template>
+

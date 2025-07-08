@@ -1,0 +1,720 @@
+<div class="flex">
+  <div class="container">
+    <mat-tab-group (selectedTabChange)="onTabClick($event)"   class="mt-4">
+        <mat-tab>
+            <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+              <img src="assets/receipt.png" alt="Recycling" width="40" height="60">
+              <!-- recycling -->
+            </ng-template>
+            <div class="  gap-4 p-4">
+                <!-- Dropdown -->
+                <div class="">
+                  <div  class=" flex justify-between">
+                    <div
+                      class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                      <select id="country" name="DropDownValue" [(ngModel)]="DropDownValue"  autocomplete="country-name"
+                        class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                        <option value="" disabled selected>Choose Your Search Type</option>
+                        <option value="id">Resit ID</option>
+                        <option value="perchaseId">Perchase ID</option>
+                      </select>
+                    </div>
+                    <div class="flex gap-4">
+                        <div>
+                          <input type="date" id="fromDate" name="fromDate" [(ngModel)]="fromDate"
+                                 class="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                </div>
+                                <label for="fromDate" class="block text-lg font-bold  text-gray-700">To</label>
+              
+                        <div>
+                        <input type="date" id="fromDate" name="ToDate" [(ngModel)]="ToDate"
+                               class="block  px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                              </div>
+        
+                              <button (click)="dateFilterComplete('ACTIVE','COMPLETED')"  style="height: 35px;" class="bg-blue-500  hover:bg-blue-700 text-white   px-4 border border-blue-700 rounded">
+                                Filter
+                              </button>
+                      </div>
+                  </div>
+      
+                  <!-- Search Form -->
+      
+                  <div class="mt-3 flex items-center" style="justify-content: space-between;">
+                    <!-- Search Form -->
+                    <form class="search-form flex items-center gap-2">
+                      <input type="text" placeholder="Enter your Search type" [(ngModel)]="searchInput" name="searchInput"
+                        class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+                      <button type="submit" (click)="search('ACTIVE','COMPLETED')"
+                        class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                        Search
+                      </button>
+                    </form>
+      
+      
+                    <button type="button" (click)="openSecondModal(first)" class="btn btn-success flex gap-1" style="margin-left: 500px;"
+                     >
+                      <img src="assets/contract.png" alt="Add" width="25" height="20" style="margin-right: 5px;">
+                      Import Resit
+                    </button>
+                  </div>
+                  <p-toast />
+      
+      
+                </div>
+      
+                <ng-template #first let-modal>
+                  <p-toast></p-toast>
+                  <div class="modal-header">
+                    <h4 class="modal-title">Third Modal</h4>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ml-4 mt-4 mb-4">
+                        <div>
+                          <label for="name" class="block mb-2 font-medium text-gray-700">SystemProfile Id</label>
+                          <input 
+                            type="text" 
+                            id="name" 
+                            name="systemProfileId" 
+                            class="input-field" 
+                            placeholder="Enter your systemProfileId" 
+                            [(ngModel)]="systemProfileId"
+                            required style="width: 300px;" />
+                        </div>
+                    <div>
+                      <label for="name" class="block mb-2 font-medium text-gray-700">Perchase Id</label>
+                      <input 
+                        type="text" 
+                        id="name" 
+                        name="perchaseId" 
+                        class="input-field" 
+                        placeholder="Enter your perchaseId" 
+                        [(ngModel)]="perchaseId"
+                        required style="width: 300px;" />
+                    </div>
+                    <div>
+                      <label for="file">Upload your Payment resit </label>
+                      <input 
+                        type="file" 
+                        class="form-control" 
+                        id="fileInput" 
+                        (change)="onFileSelected($event)" 
+                        accept="application/pdf"
+                        style="width: 300px;" >
+                    </div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-success ml-4 mb-4" style="width: 100px;" (click)="onUploadPdf()">Send</button>
+                
+                </ng-template>
+                
+      
+      
+              </div>
+      
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Resit ID</th>
+                    <th scope="col">Perchase Id</th>
+                    <th scope="col">System ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+      
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <tr *ngFor="let x of payementResitCompleted; index as i">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{x.id}}</td>
+                        <td>{{x.zoomDto?.perchaseId}}</td>
+                        <td>{{x.systemProfileDto?.systemProfilesId}}</td>
+                        <td>{{x.saveDate}}</td>
+                    <td> <p-tag severity="danger" value="Completed" [rounded]="true" /></td>
+                    <td class="flex gap-3 ">
+                      <button class="btn btn-light" (click)="openLg(content1);onViewBtn(x,i)">
+                        <img src="assets/search.png" width="22" height="20" alt="Search" />
+                      </button>
+                      <button class="btn btn-light" (click)="downloadFile(x.id)" >
+                        <img src="assets/inbox.png" width="22" height="20" alt="Search" />
+                      </button>
+                      <button class="btn btn-light" (click)="confirmComplete(x.id,'Inactive')" >
+                        <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                      </button>
+      
+      
+                    </td>
+                  </tr>
+      
+                </tbody>
+              </table>
+              <ngb-pagination [collectionSize]="collectionSize1" [(page)]="page1" [pageSize]="pageSize1"
+                (pageChange)="onPageChange2($event)">
+              </ngb-pagination>
+
+
+
+
+    
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+              <img src="assets/pending.png" alt="Recycling" width="40" height="60">
+              <!-- recycling -->
+            </ng-template>
+     
+    
+    
+            <div class=" gap-4 p-4">
+                <!-- Dropdown -->
+                <div class="">
+                  <div class="flex " style="justify-content: space-between;">
+                    <div
+                      class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                      <select id="country" name="dropDown"  autocomplete="country-name"
+                        class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                        <option value="" disabled selected>Choose Your Search Type</option>
+                        <option value="Resit ID">Resit ID</option>
+                        <option value="PerchaseID">Perchase ID</option>
+                      </select>
+                    </div>
+                    <div class="flex gap-4">
+                        <div>
+                          <input type="date" id="fromDate" name="fromDate" [(ngModel)]="fromDate"
+                                 class="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                </div>
+                                <label for="fromDate" class="block text-lg font-bold  text-gray-700">To</label>
+              
+                        <div>
+                        <input type="date" id="fromDate" name="ToDate" [(ngModel)]="ToDate"
+                               class="block  px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                              </div>
+                      </div>
+            
+                  </div>
+      
+                  <!-- Search Form -->
+      
+                  <form class="search-form flex items-center mt-3 gap-2 justify-between">
+                    <div class="flex">
+                    <input type="text" [(ngModel)]="searchInput" placeholder="Enter your Search type" name="searchInput"
+                      class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+                    <button type="submit" (click)="search('ACTIVE','APPROVED')"
+                      class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                      Search
+                    </button>
+                    </div>
+                    <button (click)="dateFilterApprove('ACTIVE','APPROVED')"  style="height: 35px;" class="bg-blue-500  hover:bg-blue-700 text-white   px-4 border border-blue-700 rounded">
+                      Filter
+                    </button>
+                  </form>
+                  <p-toast />
+      
+      
+                </div>
+      
+      
+      
+      
+              </div>
+      
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Resit ID</th>
+                    <th scope="col">Perchase ID</th>
+                    <th scope="col">System ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+      
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let x of payementResitApprove; index as i">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{x.id}}</td>
+                    <td>{{x.zoomDto?.perchaseId}}</td>
+                    <td>{{x.systemProfileDto?.systemProfilesId}}</td>
+                    <td>{{x.saveDate}}</td>
+                    <td> <p-tag severity="success" value="Paid" [rounded]="true" /></td>
+                    <td class="flex gap-3 ">
+                       
+                      <button class="btn btn-light" (click)="openLg(content2);onViewBtn(x,i)">
+                        <img src="assets/search.png" width="22" height="20" alt="Search" />
+                      </button>
+                      <button class="btn btn-light" (click)="confirmComplete(x.id,'Completed')">
+                        <img src="assets/checked.png" width="22" height="20" alt="User" />
+                      </button>
+                      <button class="btn btn-light" (click)="downloadFile(x.id)" >
+                        <img src="assets/inbox.png" width="22" height="20" alt="Search" />
+                      </button>
+                      <button class="btn btn-light" (click)="confirmComplete(x.id,'Inactive')">
+                        <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                      </button>
+      
+      
+                    </td>
+                  </tr>
+      
+                </tbody>
+              </table>
+               <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                (pageChange)="onPageChange($event)">
+              </ngb-pagination> 
+      
+      
+    
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label class="gap-6" style="font-size: medium;">
+              <img src="assets/delete-card.png" alt="Recycling" width="40" height="60">
+              <!-- recycling -->
+            </ng-template>
+            <div class=" gap-4 p-4">
+              <!-- Dropdown -->
+              <div class="">
+                <div class="flex " style="justify-content: space-between;">
+                  <div
+                    class="flex w-60 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-400 transition-all">
+                    <select id="country" name="dropDown"  autocomplete="country-name"
+                      class="block flex-1 py-2 px-3 bg-white text-gray-900 placeholder-gray-400 rounded-lg focus:ring-0 sm:text-sm">
+                      <option value="" disabled selected>Choose Your Search Type</option>
+                      <option value="Resit ID">Resit ID</option>
+                      <option value="PerchaseID">Perchase ID</option>
+                    </select>
+                  </div>
+                  <div class="flex gap-4">
+                      <div>
+                        <input type="date" id="fromDate" name="fromDate" [(ngModel)]="fromDate"
+                               class="block px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                              </div>
+                              <label for="fromDate" class="block text-lg font-bold  text-gray-700">To</label>
+            
+                      <div>
+                      <input type="date" id="fromDate" name="ToDate" [(ngModel)]="ToDate"
+                             class="block  px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            </div>
+                    </div>
+          
+                </div>
+    
+                <!-- Search Form -->
+    
+                <form class="search-form flex items-center mt-3 gap-2 justify-between">
+                  <div class="flex">
+                  <input type="text" [(ngModel)]="searchInput" placeholder="Enter your Search type" name="searchInput"
+                    class="search-input w-60 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all" />
+                  <button type="submit" (click)="search('INACTIVE','')"
+                    class="search-button px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all hover:bg-blue-600">
+                    Search
+                  </button>
+                  </div>
+                  <button (click)="dateFilterInactive('INACTIVE','')"  style="height: 35px;" class="bg-blue-500  hover:bg-blue-700 text-white   px-4 border border-blue-700 rounded">
+                    Filter
+                  </button>
+                </form>
+                <p-toast />
+    
+    
+              </div>
+    
+    
+    
+    
+            </div>
+    
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Resit ID</th>
+                  <th scope="col">Perchase Id</th>
+                  <th scope="col">System ID</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+    
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <tr *ngFor="let x of payementResitInactive; index as i">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{x.id}}</td>
+                        <td>{{x.zoomDto?.perchaseId}}</td>
+                        <td>{{x.systemProfileDto?.systemProfilesId}}</td>
+                        <td>{{x.saveDate}}</td>
+                        <td>    <span [ngSwitch]="x.requestStatus">
+                            <p-tag *ngSwitchCase="'PENDING'" severity="success" value="pending" [rounded]="true" />
+                            <p-tag *ngSwitchCase="'COMPLETED'" severity="danger" value="Completed" [rounded]="true"  />
+                            <p-tag *ngSwitchDefault severity="secondary" value="Unknown" [rounded]="true"  />
+                          </span></td>                  <td class="flex gap-3 ">
+                    <button class="btn btn-light" (click)="confirmComplete(x.id,'Active')">
+                      <img src="assets/data-recovery.png" width="22" height="20" alt="User" />
+                    </button>
+                    <button class="btn btn-light" (click)="openLg(content3);onViewBtn(x,i)" >
+                      <img src="assets/search.png" width="22" height="20" alt="Search" />
+                    </button>
+                    <button class="btn btn-light" (click)="downloadFile((x.id))" >
+                        <img src="assets/inbox.png" width="22" height="20" alt="Search" />
+                    </button>
+                    <button class="btn btn-light" (click)="confirmComplete(x.id,'deleteDatabase')">
+                      <img src="assets/bin.png" width="22" height="20" alt="Delete" />
+                    </button>
+    
+    
+                  </td>
+                </tr>
+    
+              </tbody>
+            </table>
+            <ngb-pagination [collectionSize]="collectionSize2" [(page)]="page1" [pageSize]="pageSize2"
+              (pageChange)="onPageChange3($event)">
+            </ngb-pagination>
+    
+    
+    
+          </mat-tab>
+
+    </mat-tab-group>
+
+  </div>
+  </div>
+  <ng-template #content1 let-modal>
+    <p-toast></p-toast>
+    <div class="modal-header">
+      <h4 class="modal-title">Payment Resith ID :{{payementResitshow.id}}</h4>
+      <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+  
+      <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+          <label for="contact" class="block mb-2 font-medium text-gray-700">Download Resit</label>
+          <button class="btn btn-light" (click)="downloadFile(payementResitshow.id)" >
+            <img src="assets/inbox.png" width="52" height="50" alt="Search" />
+          </button>
+          </div>
+          
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Submit Date</label>
+            <input type="text" id="contact" style="width: 300px;" name=""
+            value="{{payementResitshow.saveDate}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+  
+  
+          
+        </div>
+          
+  
+        
+        
+  
+          <h2 class="text-lg font-semibold mt-4">System Details</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+              <input type="text" id="contact" style="width: 300px;" name=""
+              value="{{payementResitshow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{payementResitshow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{payementResitshow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+        
+          </div>
+         
+    <!-- Schedule Meeting -->
+    <h2 class="text-lg font-semibold mt-4"> Meeting Details</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+      <div>
+        <label for="topic" class="block mb-2 font-medium text-gray-700">Perchase ID</label>
+        <input type="text" id="topic" name="topic" style="width: 300px;" value="{{payementResitshow.zoomDto?.perchaseId}}"
+          class=" input-field" placeholder="Enter topic" disabled />
+      </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Date</label>
+        <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startDate}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+    </div>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Date</label>
+        <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startDate}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Time</label>
+          <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startTime}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+    </div>
+  
+   
+    <div class="flex gap-4">
+    <button type="button" class="btn btn-warning" (click)="confirmComplete(payementResitshow.id,'Inactive');modal.close('Close click')" >Delete</button>
+    </div>
+    <!-- Submit Button -->
+    </form>
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  <div class="modal-footer ">
+  <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+  </ng-template>
+
+
+
+
+  <ng-template #content2 let-modal>
+    <p-toast></p-toast>
+    <div class="modal-header">
+      <h4 class="modal-title">Payment Resith ID :{{payementResitshow.id}}</h4>
+      <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+  
+      <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+          <label for="contact" class="block mb-2 font-medium text-gray-700">Download Resit</label>
+          <button class="btn btn-light" (click)="downloadFile(payementResitshow.id)" >
+            <img src="assets/inbox.png" width="52" height="50" alt="Search" />
+          </button>
+          </div>
+          
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Submit Date</label>
+            <input type="text" id="contact" style="width: 300px;" name=""
+            value="{{payementResitshow.saveDate}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+  
+  
+          
+        </div>
+          
+  
+        
+        
+  
+          <h2 class="text-lg font-semibold mt-4">System Details</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+              <input type="text" id="contact" style="width: 300px;" name=""
+              value="{{payementResitshow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{payementResitshow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{payementResitshow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+        
+          </div>
+         
+    <!-- Schedule Meeting -->
+    <h2 class="text-lg font-semibold mt-4"> Meeting Details</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+      <div>
+        <label for="topic" class="block mb-2 font-medium text-gray-700">Perchase ID</label>
+        <input type="text" id="topic" name="topic" style="width: 300px;" value="{{payementResitshow.zoomDto?.perchaseId}}"
+          class=" input-field" placeholder="Enter topic" disabled />
+      </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Date</label>
+        <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startDate}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+    </div>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting ID</label>
+        <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.zmeetingId}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Time</label>
+          <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startTime}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+    </div>
+  
+   
+    <div class="flex gap-4">
+      <button type="button" class="btn btn-success" (click)="confirmComplete(payementResitshow.id,'Completed');modal.close('Close click')">Confirm Complete Business</button>
+    <button type="button" class="btn btn-warning"  (click)="confirmComplete(payementResitshow.id,'Inactive');modal.close('Close click')">Delete</button>
+    </div>
+    <!-- Submit Button -->
+    </form>
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  <div class="modal-footer ">
+  <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+  </ng-template>
+
+
+  <ng-template #content3 let-modal>
+    <p-toast></p-toast>
+    <div class="modal-header">
+      <div class="flex gap-12 justify-between ">
+      <h4 class="modal-title">Payment Resit ID :{{payementResitshow.id}}</h4>
+      <h4 class="modal-title"> Status :
+        <span [ngSwitch]="payementResitshow.requestStatus">
+          <p-tag *ngSwitchCase="'APPROVED'" severity="success" value="Approved" [rounded]="true" />
+          <p-tag *ngSwitchCase="'COMPLETED'" severity="info" value="Completed" [rounded]="true"  />
+          <p-tag *ngSwitchDefault severity="secondary" value="Unknown" [rounded]="true"  />
+        </span>
+      </h4>
+      </div>
+      <button type="button" class="btn-close btn-danger " style="background-color: red;" aria-label="Close"
+        (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+  
+      <form class="space-y-6 p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+          <div>
+          <label for="contact" class="block mb-2 font-medium text-gray-700">Download Resit</label>
+          <button class="btn btn-light" (click)="downloadFile(payementResitshow.id)" >
+            <img src="assets/inbox.png" width="52" height="50" alt="Search" />
+          </button>
+          </div>
+          <div>
+            <label for="contact" class="block mb-2 font-medium text-gray-700">Submit Date</label>
+            <input type="text" id="contact" style="width: 300px;" name=""
+            value="{{payementResitshow.saveDate}}" class=" input-field" placeholder="Enter your contact number"
+            disabled />
+          </div>
+  
+  
+  
+          
+        </div>
+          
+  
+        
+        
+  
+          <h2 class="text-lg font-semibold mt-4">System Details</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System ID</label>
+              <input type="text" id="contact" style="width: 300px;" name=""
+              value="{{payementResitshow.systemProfileDto?.systemProfilesId}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">System Name</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{payementResitshow.systemProfileDto?.systemProfilesName}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between ">
+            <div>
+              <label for="contact" class="block mb-2 font-medium text-gray-700">Prise</label>
+              <input type="text" id="contact" style="width: 300px;" name="systemProfilesId2"
+              value="{{payementResitshow.systemProfileDto?.systemProfilesPrice}}" class=" input-field" placeholder="Enter your contact number"
+              disabled />
+            </div>
+        
+          </div>
+         
+    <!-- Schedule Meeting -->
+    <h2 class="text-lg font-semibold mt-4"> Meeting Details</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-between">
+      <div>
+        <label for="topic" class="block mb-2 font-medium text-gray-700">Perchase ID</label>
+        <input type="text" id="topic" name="topic" style="width: 300px;" value="{{payementResitshow.zoomDto?.perchaseId}}"
+          class=" input-field" placeholder="Enter topic" disabled />
+      </div>
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Date</label>
+        <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startDate}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+    </div>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-9 justify-between">
+      <div>
+        <label for="duration" class="block mb-2 font-medium text-gray-700">Meeting ID</label>
+        <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.zmeetingId}}" style="width: 300px;"
+          class=" input-field" placeholder="Enter duration in minutes" disabled  />
+      </div>
+        <div>
+          <label for="duration" class="block mb-2 font-medium text-gray-700">Time</label>
+          <input type="text" id="duration" name="duration" value="{{payementResitshow.zoomDto?.startTime}}" style="width: 300px;"
+            class=" input-field" placeholder="Enter duration in minutes" disabled  />
+        </div>
+    </div>
+  
+   
+    <div class="flex gap-4">
+      <button (click)="confirmComplete(payementResitshow.id,'Active');modal.close('Close click')" class="btn btn-success"> Recover Account</button>
+
+    <button type="button" class="btn btn-warning" (click)="confirmComplete(payementResitshow.id,'deleteDatabase');modal.close('Close click')" >Delete</button>
+    </div>
+    <!-- Submit Button -->
+    </form>
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  <div class="modal-footer ">
+  <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+  </ng-template>
