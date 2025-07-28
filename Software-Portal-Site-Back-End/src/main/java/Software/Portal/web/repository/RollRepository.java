@@ -16,4 +16,6 @@ public interface RollRepository extends JpaRepository<Roll,Long> {
     Roll getByRollId(Long rollId);
 
     Optional<Roll> findByRollName(Roles role);
+
+    Roll getByRollName(Roles roles);
 }

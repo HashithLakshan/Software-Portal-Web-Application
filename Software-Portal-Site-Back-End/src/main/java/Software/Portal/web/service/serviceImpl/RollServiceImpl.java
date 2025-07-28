@@ -38,7 +38,33 @@ public class RollServiceImpl implements RollService {
     }
 
 
+    @Transactional
+    @PostConstruct // This method runs automatically when the app starts
+    public void autoSaveRollAndAdminOnStartup() {
+        if (rollRepository.count() == 0) { // Prevent duplicate inserts
+            for (int i = 0; i < Roles.values().length; i++) {
+                Roll roll = new Roll();
+                roll.setRollId(1L + i);
+                roll.setRollName(Roles.values()[i]);
+                roll.setCommonStatus(CommonStatus.ACTIVE);
+                rollRepository.save(roll);
+            }
 
+
+        }if (userRepository.count() == 0) {
+            User user = new User();
+            Roll roll = rollRepository.getByRollName(Roles.ADMIN);
+        user.setRoll(Set.of(roll));
+        user.setUserId("1");
+        user.setUserName("Super Admin");
+        user.setEmail("lakshanhashitht@gmail.com");
+        user.setPassword("$2a$10$c0ZcqCZrSo419dkuUlkGM.5TU2NzCQAop0lt6UH1.lJjTXMy8lN1O");
+        user.setCommonStatus(CommonStatus.ACTIVE);
+        user.setRequestStatus(RequestStatus.APPROVED);
+        userRepository.save(user);
+    }
+
+    }
 
 
     @Override
